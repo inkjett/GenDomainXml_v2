@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<omx xmlns="system" migration="27" xmlns:dp="automation.deployment" xmlns:eth="automation.ethernet" xmlns:srv="server">
+  <link-unit name="System" uuid="2d7f95c0-e98a-4c51-943e-9821ac852613" target="Om.System" />
+  <link-unit name="Server" uuid="85b6d6ff-31a5-4e68-a463-0a1543cc69f3" target="Om.Server" />
+  <link-unit name="PLC" uuid="6a12b73a-5b79-4f54-aa59-6dfd59b93c4e" target="Om.PLC" />
+  <dp:domain name="Domain" uuid="7346d053-7a97-44cf-8196-d5dfe13484f6" address="local">
+    <dp:domain-node name="ARM" uuid="051fb1e9-fa44-41ad-b217-a3773bd4dba1" address="ARM">
+      <eth:ethernet-adapter name="EthernetAdapter" uuid="9c764b25-0539-4fea-b081-b11ca0bf127e" address="127.0.0.1" network="Ethernet" />
+      <srv:io-server name="Server" uuid="a5e40cb8-71ad-4ebe-87c6-1b3eab4d2517">
+        <srv:opcda-server name="DaServer" uuid="1f942caa-2ac0-4a03-830c-b34836a1513c" />
+        <srv:opcaeserver-module name="AeServer" uuid="1f1f4a7d-6861-4991-9264-3e15f3b42af0" />
+        <srv:hda-server name="HdaServer" uuid="199d08b4-8ae7-4e2d-b2d0-e7076ac0cadc" />
+        <srv:opcua-module name="UaServer" uuid="d36e7582-796e-4bf4-9110-263cf0157dd4" />
+        <srv:tcp-server name="TcpServer" uuid="737e852b-e35c-4f7d-8c4b-dbbe1bc019f9" />
+        <srv:history-module name="HistoryModule" uuid="65880d6c-992b-4e6c-9d1c-68f20aeef90a" />
+      </srv:io-server>
+    </dp:domain-node>
+    <eth:ethernet-net name="Ethernet" uuid="ec063ca5-b7a9-4194-9163-f268758139f6" />
+  </dp:domain>
+</omx>
