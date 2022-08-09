@@ -7,13 +7,28 @@ import Data_processing_functions as DP
 import xml.etree.ElementTree as ET  # подключаем The ElementTree XML
 import GlobalVariables as GV
 
+# Фукции
+def select_deployment():
+    print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?')
+    print("1 Локальное развертывание\n2 Удаленное развертывание")
+    for i in range(3):
+        temp = input()
+        if temp.isdigit() and 1 <= int(temp) <= 2:
+            GV.Selected_deployment = int(temp)
+            break
+        else:
+            print('Необходимо ввести число от 1 до 2, количество попыток', 2 - i, ':')
+
+
+
 # Переменные
 selected_file_name = ""
 rootTree = ""
 domain_Name = ""
 domains_data = {"Domains": {}}
+Selected_Domain = 0
 
-# Получаем списко файлов
+# Получаем список файлов
 files_list = []
 [files_list.append(f) for f in os.listdir(os.getcwd()) if ".omx" in f]  # Создаем список файлов с расширением omx
 if len(files_list) > 1:  # выбор файла
@@ -43,6 +58,31 @@ for i in rootTree:  # проходим по всему дереву
                                                    'ethernet_address': GV.ethernet_address,
                                                    'server_name': GV.server_name}  # domains_data = {"Domains": {}}вставляем в словарь новую строку
 print(domains_data)
+
+# Выбор домена
+domain_len = len(domains_data["Domains"])
+#dict - {'Domains': {'Domain': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}, 'Domain1': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}}}
+if domain_len >= 1:
+    print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
+    for i in domains_data["Domains"]:
+        print(list(domains_data["Domains"].keys()).index(i) + 1, i)
+    Selected_Domain = DP.select_value(domain_len, 3) - 1
+else:
+    print("Доступен один домен:", list(domains_data["Domains"].keys())[0])
+    Selected_Domain = 0
+
+# print(list(domains_data["Domains"].keys())[Selected_Domain])
+
+print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?')
+print("1 Локальное развертывание\n2 Удаленное развертывание")
+for i in range(3):
+    temp = input()
+    if temp.isdigit() and 1 <= int(temp) <= 2:
+        GV.Selected_deployment = int(temp)
+        break
+    else:
+        print('Необходимо ввести число от 1 до 2, количество попыток', 2 - i, ':')
+
 # print(GV.domain_exemplar_dict)
 # data = {
 #     "president": {
