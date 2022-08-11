@@ -1,4 +1,3 @@
-import WorkWithFile
 import Data_processing_functions as Data
 import GlobalVariables
 import os
@@ -13,6 +12,7 @@ rootTree = ""
 domain_Name = ""
 domains_data = {"Domains": {}}
 Selected_Domain = 0
+Selected_Deployment = 0
 
 # Получаем список файлов
 files_list = []
@@ -40,14 +40,18 @@ for i in rootTree:  # проходим по всему дереву
         GV.domain_Name = i.get("name")  # ищем имя домена
         Data.get_data_from_Tree(i.get("address"), i)  # вызываем рекурсивную функцию по поиску нужных элементов
         domains_data["Domains"][GV.domain_Name] = {'domain_address': GV.domain_address,
+                                                   'node_name': GV.node_name,
+                                                   'node_address': GV.node_address,
                                                    'ethernet_address': GV.ethernet_address,
-                                                   'server_name': GV.server_name}  # domains_data = {"Domains": {}}вставляем в словарь новую строку
+                                                   'server_name': GV.server_name}  # domains_data = {"Domains": {
+        # }}вставляем в словарь новую строку
 # print(domains_data)
 
 # Выбор домена
 domain_len = len(domains_data["Domains"])
-# dict - {'Domains': {'Domain': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}, 'Domain1': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}}}
-if domain_len >= 1:
+# dict - {'Domains': {'Domain': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name':
+# 'Server'}, 'Domain1': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}}}
+if domain_len > 1:
     print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
     for i in domains_data["Domains"]:
         print(list(domains_data["Domains"].keys()).index(i) + 1, i)
@@ -55,13 +59,16 @@ if domain_len >= 1:
 else:
     print("Доступен один домен:", list(domains_data["Domains"].keys())[0])
     Selected_Domain = 0
-
+print(domains_data["Domains"][list(domains_data["Domains"].keys())[Selected_Domain]]["node_address"])
 # Выбор развертования
 print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2 '
       'Удаленное развертывание')
-DP.select_value(2, 3)
+Selected_Deployment = DP.select_value(2, 3)
 
-print(DP.gen_local_net_xml(list(domains_data["Domains"].keys())[Selected_Domain], "1010", "1020"))
+
+if Selected_Deployment == 1:
+    DP.save_data_to_file("alpha.net.agent.xml",
+                         DP.gen_local_net_xml(list(domains_data["Domains"].keys())[Selected_Domain], "1010", "1020"))
 
 # print(list(domains_data["Domains"].keys())[Selected_Domain])
 

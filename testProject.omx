@@ -4,7 +4,7 @@
   <link-unit name="Server" uuid="85b6d6ff-31a5-4e68-a463-0a1543cc69f3" target="Om.Server" />
   <link-unit name="PLC" uuid="6a12b73a-5b79-4f54-aa59-6dfd59b93c4e" target="Om.PLC" />
   <dp:domain name="Domain" uuid="7346d053-7a97-44cf-8196-d5dfe13484f6" address="local">
-    <dp:domain-node name="ARM" uuid="051fb1e9-fa44-41ad-b217-a3773bd4dba1" address="ARM">
+    <dp:domain-node name="ARM" uuid="051fb1e9-fa44-41ad-b217-a3773bd4dba1" address="ARM_1">
       <eth:ethernet-adapter name="EthernetAdapter" uuid="9c764b25-0539-4fea-b081-b11ca0bf127e" address="127.0.0.1" network="Ethernet" />
       <srv:io-server name="Server" uuid="a5e40cb8-71ad-4ebe-87c6-1b3eab4d2517">
         <srv:opcda-server name="DaServer" uuid="1f942caa-2ac0-4a03-830c-b34836a1513c" />
@@ -17,18 +17,4 @@
     </dp:domain-node>
     <eth:ethernet-net name="Ethernet" uuid="ec063ca5-b7a9-4194-9163-f268758139f6" />
   </dp:domain>
-  <domain name="Domain1" address="local" xmlns="automation.deployment" uuid="43d3fbf8-0c7a-449f-a101-d7ffb9b1b751">
-    <domain-node name="ARM" address="ARM" uuid="e5667149-2cda-4176-aee4-d3864cba0298">
-      <ethernet-adapter name="EthernetAdapter" address="127.0.0.1" network="Ethernet" xmlns="automation.ethernet" uuid="8b860508-842d-43e9-beb0-f8a263222bb1" />
-      <io-server name="Server" xmlns="server" uuid="c5e2c173-fc1b-4f43-9396-5ed485b3f33f">
-        <opcda-server name="DaServer" uuid="42a870f4-d928-4a7d-9de1-ceb4090b76c7" />
-        <opcaeserver-module name="AeServer" uuid="3e195d48-f71c-4435-a0bc-a2fc0775926b" />
-        <hda-server name="HdaServer" uuid="3767127b-cf55-43dd-97a6-7bf342cb3ca2" />
-        <opcua-module name="UaServer" uuid="4db16674-be4e-4cd5-b255-854aa34d1999" />
-        <tcp-server name="TcpServer" uuid="6dd1b015-1fac-4dcb-9516-914b8823bc3a" />
-        <history-module name="HistoryModule" uuid="f7672ef1-189d-47e3-8e6b-1fc606e78608" />
-      </io-server>
-    </domain-node>
-    <ethernet-net name="Ethernet" xmlns="automation.ethernet" uuid="624672c7-ddc7-4556-9fc6-95b5f5946cce" />
-  </domain>
 </omx>

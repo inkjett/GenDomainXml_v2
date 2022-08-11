@@ -5,6 +5,8 @@ domain_exemplar_dict = {}  # словарь элементов
 
 domain_address = ''
 domain_Name = ''
+node_name = ""
+node_address = ""
 ARM = ''
 ethernet_address = ''
 server_name = ''

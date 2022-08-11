@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET  # подключаем The ElementTree XML
 import CommentForXml as Comment
 import xml.dom.minidom
 import GlobalVariables as GV
+import os
 
 # словарь
 # elements = {"element1": {"armName": "", "ethernet-adapter": "", "ethernet-adapter_1": "", "io-server": ""},
@@ -32,8 +33,10 @@ def get_data_from_Tree(_domain_address, value_in):
     GV.domain_address = _domain_address
     for x in value_in:
         if x.tag == "{automation.deployment}domain-node":
-            # print("ARM=", x.get("address"))
-            GV.ARM = x.get("address")
+            # print("ARM_name=", x.get("name"))
+            # print("ARM_address=", x.get("address"))
+            GV.node_name = x.get("name")
+            GV.node_address = x.get("address")
         if x.tag == "{automation.ethernet}ethernet-adapter":
             # print("addressEthernet=", x.get("address"))
             GV.ethernet_address = x.get("address")
@@ -54,3 +57,8 @@ def select_value(_maxlength, _attempt):
             print('Необходимо ввести число от 1 до', _maxlength, 'количество попыток', 2 - i, ':')
     else:
         return - 1
+
+# запись данных в файл
+def save_data_to_file(fileName, textSave):
+    with open(fileName, "w") as filetowrite:
+        filetowrite.write(textSave)
