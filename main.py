@@ -1,27 +1,13 @@
 import WorkWithFile
 import Data_processing_functions as Data
 import GlobalVariables
-import DominElements as DM
 import os
 import Data_processing_functions as DP
 import xml.etree.ElementTree as ET  # подключаем The ElementTree XML
 import GlobalVariables as GV
 
-# Фукции
-def select_deployment():
-    print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?')
-    print("1 Локальное развертывание\n2 Удаленное развертывание")
-    for i in range(3):
-        temp = input()
-        if temp.isdigit() and 1 <= int(temp) <= 2:
-            GV.Selected_deployment = int(temp)
-            break
-        else:
-            print('Необходимо ввести число от 1 до 2, количество попыток', 2 - i, ':')
-
-
-
 # Переменные
+
 selected_file_name = ""
 rootTree = ""
 domain_Name = ""
@@ -41,7 +27,7 @@ elif len(files_list) == 1:
     print("Найден файл:", selected_file_name)
 else:
     print("Файлы не наедены")
-del files_list  # удаляем переменную со списком файлов
+# del files_list  # удаляем переменную со списком файлов
 
 # чтение данных из файла
 with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим по всем строкам файла проекта
@@ -49,7 +35,6 @@ with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим �
     rootTree = tree.getroot()
 
 # поиск данных домена
-
 for i in rootTree:  # проходим по всему дереву
     if i.tag == "{automation.deployment}domain":  # ищем тег с названием домена
         GV.domain_Name = i.get("name")  # ищем имя домена
@@ -57,11 +42,11 @@ for i in rootTree:  # проходим по всему дереву
         domains_data["Domains"][GV.domain_Name] = {'domain_address': GV.domain_address,
                                                    'ethernet_address': GV.ethernet_address,
                                                    'server_name': GV.server_name}  # domains_data = {"Domains": {}}вставляем в словарь новую строку
-print(domains_data)
+# print(domains_data)
 
 # Выбор домена
 domain_len = len(domains_data["Domains"])
-#dict - {'Domains': {'Domain': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}, 'Domain1': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}}}
+# dict - {'Domains': {'Domain': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}, 'Domain1': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}}}
 if domain_len >= 1:
     print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
     for i in domains_data["Domains"]:
@@ -71,28 +56,14 @@ else:
     print("Доступен один домен:", list(domains_data["Domains"].keys())[0])
     Selected_Domain = 0
 
+# Выбор развертования
+print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2 '
+      'Удаленное развертывание')
+DP.select_value(2, 3)
+
+print(DP.gen_local_net_xml(list(domains_data["Domains"].keys())[Selected_Domain], "1010", "1020"))
+
 # print(list(domains_data["Domains"].keys())[Selected_Domain])
-
-print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?')
-print("1 Локальное развертывание\n2 Удаленное развертывание")
-for i in range(3):
-    temp = input()
-    if temp.isdigit() and 1 <= int(temp) <= 2:
-        GV.Selected_deployment = int(temp)
-        break
-    else:
-        print('Необходимо ввести число от 1 до 2, количество попыток', 2 - i, ':')
-
-# print(GV.domain_exemplar_dict)
-# data = {
-#     "president": {
-#         "name": "Zaphod Beeblebrox",
-#         "species": "Betelgeusian"
-#     }
-# }
-# json_string = json.dumps(data, indent=4)
-# print(json_string)
-
 
 # WorkWithFile.get_data_from_file("testProject.omx")
 # DataFunc.gen_domain_xml_str()

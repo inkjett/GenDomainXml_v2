@@ -9,12 +9,12 @@ import GlobalVariables as GV
 elements = {}
 
 
-def gen_local_net_xml():
+def gen_local_net_xml(_Name, _NetEnterPort, _ParentAgentPort):
     # root
     root = ET.Element("Alpha.Net.Agent")
-    root.set("Name", elements["element1"]['armName'])
-    root.set("NetEnterPort", "1010")
-    root.set("ParentAgentPort", "1020")
+    root.set("Name", _Name)
+    root.set("NetEnterPort", _NetEnterPort)
+    root.set("ParentAgentPort", _ParentAgentPort)
 
     # root.Options
     ET.SubElement(root, 'Options LoggerLevel="2"')
@@ -25,8 +25,7 @@ def gen_local_net_xml():
     pretty_xml_as_string = xml.dom.minidom.parseString(
         ET.tostring(root, encoding='utf-8', method='xml',
                     xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" виду
-    GV.net_pretty_xml = pretty_xml_as_string
-
+    return pretty_xml_as_string
 
 
 def get_data_from_Tree(_domain_address, value_in):
@@ -42,36 +41,6 @@ def get_data_from_Tree(_domain_address, value_in):
             # print("nameServer=", x.get("name"))
             GV.server_name = x.get("name")
         get_data_from_Tree(_domain_address, x)
-
-
-def select_domain():
-    domain_len = len(GV.domain_exemplar_dict)
-    # print(domain_len) количество доменов
-    # dict - {ключ: значение} dict_items([('Domain', {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'})])
-    if domain_len >= 1:
-        print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
-        for i in GV.domain_exemplar_dict:
-            print(list(GV.domain_exemplar_dict.keys()).index(i) + 1, i)
-            select_domain(domain_len, 3)
-    else:
-        print("Выбран Домен:", list(GV.domain_exemplar_dict.keys())[0])
-        GV.Selected_Domain = 0
-
-        # for count, i in enumerate(GV.domain_exemplar_dict):  # i - ключи словаря GV.domain_exemplar_dict, выводим
-        #     # наеденые домены
-        #     print(count+1, i)
-
-
-def select_deployment():
-    print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?')
-    print("1 Локальное развертывание\n2 Удаленное развертывание")
-    for i in range(3):
-        temp = input()
-        if temp.isdigit() and 1 <= int(temp) <= 2:
-            GV.Selected_deployment = int(temp)
-            break
-        else:
-            print('Необходимо ввести число от 1 до 2, количество попыток', 2 - i, ':')
 
 
 def select_value(_maxlength, _attempt):
