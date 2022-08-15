@@ -60,15 +60,19 @@ else:
     print("Доступен один домен:", list(domains_data["Domains"].keys())[0])
     Selected_Domain = 0
 print(domains_data["Domains"][list(domains_data["Domains"].keys())[Selected_Domain]]["node_address"])
+
 # Выбор развертования
 print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2 '
       'Удаленное развертывание')
-Selected_Deployment = DP.select_value(2, 3)
+#Selected_Deployment = DP.select_value(2, 3)
+Selected_Deployment = 1
 
 
-if Selected_Deployment == 1:
-    DP.save_data_to_file("alpha.net.agent.xml",
-                         DP.gen_local_net_xml(list(domains_data["Domains"].keys())[Selected_Domain], "1010", "1020"))
+# if Selected_Deployment == 1:
+#     DP.save_data_to_file("alpha.net.agent.xml",
+#                          DP.gen_local_net_xml(list(domains_data["Domains"].keys())[Selected_Domain], "1010", "1020"))
+
+DP.gen_local_domain_xml()
 
 # print(list(domains_data["Domains"].keys())[Selected_Domain])
 

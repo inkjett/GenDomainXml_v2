@@ -12,6 +12,8 @@ elements = {}
 
 def gen_local_net_xml(_Name, _NetEnterPort, _ParentAgentPort):
     # root
+    # <Alpha.Net.Agent Name="GB_GES" NetEnterPort="1010" ParentAgentPort="1020">
+
     root = ET.Element("Alpha.Net.Agent")
     root.set("Name", _Name)
     root.set("NetEnterPort", _NetEnterPort)
@@ -28,6 +30,57 @@ def gen_local_net_xml(_Name, _NetEnterPort, _ParentAgentPort):
                     xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" виду
     return pretty_xml_as_string
 
+
+def gen_local_domain_xml():
+    # root
+    # <Alpha.Domain.Agent Name="NDA">
+    root = ET.Element("Alpha.Domain.Agent")
+    root.set("Name", "NDA")
+    root.insert(0, ET.Comment(Comment.domaincomment1))  # вставляем комментарий
+
+    # EntryPointNetAgent
+    # <EntryPointNetAgent Name="local" Address="127.0.0.1" Port="1010"/>
+    ET.SubElement(root, "EntryPointNetAgent")
+    root[1].set("Name", "local")
+    root[1].set("Address", "127.0.0.1")
+    root[1].set("Port", "1010")
+    root[1].insert(0, ET.Comment(Comment.domaincomment2))  # вставляем комментарий
+
+    # InstalledComponents
+    # < InstalledComponents >
+    #     < Alpha.Server Name = "Server_1" ServiceName = "Alpha.Server" DefaultActivation = "1" / >
+    # < / InstalledComponents >
+
+    ET.SubElement(root, "InstalledComponents")
+    ET.SubElement(root[2], "Alpha.Server")
+    root[2][0].set("Name", "Server_1")
+    root[2][0].set("ServiceName", "Alpha.Server")
+    root[2][0].set("DefaultActivation", "1")
+    #root.insert(1, ET.Comment(Comment.domaincomment2))  # вставляем комментарий
+    # Server
+    # < Server >
+    #   < Components StoragePath = "c:\DomainStorage\cache\server" >
+    #       < Component InstalledName = "Server_1" Name = "Server" StorageLimitSize = "0" StorageLimitNum = "0" / >
+    #   < / Components >
+    # < / Server >
+
+    ET.SubElement(root, "Server")
+    ET.SubElement(root[3], "Components")
+    ET.SubElement(root[3][0], "Component")
+    root[3][0].set("StoragePath", "c:\DomainStorage\cache\server")
+    root[3][0][0].set("InstalledName", "Server_1")
+    root[3][0][0].set("Name", "Server")
+    root[3][0][0].set("StorageLimitSize", "0")
+    root[3][0][0].set("StorageLimitNum", "0")
+
+    # Options LoggerLevel
+    ET.SubElement(root, 'Options LoggerLevel="2"')
+
+
+    pretty_xml_as_string = xml.dom.minidom.parseString(
+        ET.tostring(root, encoding='utf-8', method='xml',
+                    xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" в
+    print(pretty_xml_as_string)
 
 def get_data_from_Tree(_domain_address, value_in):
     GV.domain_address = _domain_address
@@ -57,6 +110,7 @@ def select_value(_maxlength, _attempt):
             print('Необходимо ввести число от 1 до', _maxlength, 'количество попыток', 2 - i, ':')
     else:
         return - 1
+
 
 # запись данных в файл
 def save_data_to_file(fileName, textSave):
