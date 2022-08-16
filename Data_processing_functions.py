@@ -10,7 +10,7 @@ import os
 elements = {}
 
 
-def gen_net_xml(_LocalRemote, _DomainName, _NodeName, _NetEnterPort, _ParentAgentPort):
+def gen_net_xml(_LocalRemote, _DomainAddress, _NodeAddress, _NetEnterPort, _ParentAgentPort):
     # root
     # <Alpha.Net.Agent Name="GB_GES" NetEnterPort="1010" ParentAgentPort="1020">
 

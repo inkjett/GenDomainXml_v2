@@ -11,8 +11,7 @@ selected_file_name = ""
 rootTree = ""
 domain_Name = ""
 domains_data = {"Domains": {}}
-Selected_Domain = 0
-Selected_Domain_temp = ""
+Selected_Domain = ""
 Selected_Deployment = 0
 
 # Получаем список файлов
@@ -46,7 +45,7 @@ for i in rootTree:  # проходим по всему дереву
                                                    'ethernet_address': GV.ethernet_address,
                                                    'server_name': GV.server_name}  # domains_data = {"Domains": {
         # }}вставляем в словарь новую строку
-# print(domains_data)
+print(domains_data)
 
 # Выбор домена
 # dict - {'Domains': {'Domain': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name':
@@ -57,28 +56,26 @@ if domain_len > 1:
     print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
     for i in domains_data["Domains"]:
         print(list(domains_data["Domains"].keys()).index(i) + 1, i)
-    Selected_Domain = DP.select_value(domain_len, 3) - 1
-    Selected_Domain_temp = list(domains_data["Domains"].keys())[DP.select_value(domain_len, 3) - 1]
+    Selected_Domain = list(domains_data["Domains"].keys())[DP.select_value(domain_len, 3) - 1]
 else:
-    print("Доступен один домен:", list(domains_data["Domains"].keys())[0])
-    Selected_Domain_temp = list(domains_data["Domains"].keys())[0]
-    Selected_Domain = 0
-
-print(domains_data["Domains"][Selected_Domain_temp]["domain_address"])
+    Selected_Domain = list(domains_data["Domains"].keys())[0]
+    print("Доступен один домен:", Selected_Domain)
+# print(domains_data["Domains"][Selected_Domain]["domain_address"])
 
 # Выбор развертования
-# print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2 '
-#       'Удаленное развертывание')
-# #Selected_Deployment = DP.select_value(2, 3)
-# Selected_Deployment = 1
+print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2 '
+      'Удаленное развертывание')
+#Selected_Deployment = DP.select_value(2, 3)
+Selected_Deployment = 2
 
 # print(domains_data["Domains"][list(domains_data["Domains"].keys())[Selected_Domain]]["domain_address"])
 #print(domains_data["Domains"])
-# if Selected_Deployment == 1:
-#     print(list(domains_data["Domains"].keys())[Selected_Domain])
-#net_xml = DP.gen_net_xml("Remote", list(domains_data["Domains"].keys())[Selected_Domain], "1010", "1020")
-#print(net_xml)
-#DP.save_data_to_file("alpha.net.agent.xml", net_xml)
+if Selected_Deployment == 1:
+    print(list(domains_data["Domains"].keys())[Selected_Domain])
+elif Selected_Deployment == 2:
+    net_xml = DP.gen_net_xml("Remote",  Selected_Domain, "1010", "1020")
+    print(net_xml)
+    DP.save_data_to_file("alpha.net.agent.xml", net_xml)
 
 # DP.gen_local_domain_xml()
 
