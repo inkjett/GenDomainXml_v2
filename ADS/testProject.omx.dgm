@@ -15,4 +15,12 @@
     <domain-node Id="051fb1e9-fa44-41ad-b217-a3773bd4dba1" Left="40" Top="40" Width="118.993333333333" Height="76" />
     <ethernet-net Id="ec063ca5-b7a9-4194-9163-f268758139f6" Left="342.5" Top="20" Width="76.0066666666667" Height="32.59" />
   </domain>
+  <io-server Id="a5e40cb8-71ad-4ebe-87c6-1b3eab4d2517" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <opcda-server Id="1f942caa-2ac0-4a03-830c-b34836a1513c" Left="1138.82333333333" Top="26" Width="117.176666666667" Height="36.63" />
+    <opcaeserver-module Id="1f1f4a7d-6861-4991-9264-3e15f3b42af0" Left="1140.97333333333" Top="102.63" Width="115.026666666667" Height="36.63" />
+    <hda-server Id="199d08b4-8ae7-4e2d-b2d0-e7076ac0cadc" Left="1131.01333333333" Top="179.26" Width="124.986666666667" Height="36.63" />
+    <opcua-module Id="d36e7582-796e-4bf4-9110-263cf0157dd4" Left="1138.98" Top="255.89" Width="117.02" Height="36.63" />
+    <tcp-server Id="737e852b-e35c-4f7d-8c4b-dbbe1bc019f9" Left="1142.09666666667" Top="332.52" Width="113.903333333333" Height="36.63" />
+    <history-module Id="65880d6c-992b-4e6c-9d1c-68f20aeef90a" Left="66" Top="269.52" Width="152.443333333333" Height="99.63" />
+  </io-server>
 </Diagrams>

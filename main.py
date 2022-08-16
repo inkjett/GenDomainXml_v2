@@ -12,6 +12,7 @@ rootTree = ""
 domain_Name = ""
 domains_data = {"Domains": {}}
 Selected_Domain = 0
+Selected_Domain_temp = ""
 Selected_Deployment = 0
 
 # Получаем список файлов
@@ -48,31 +49,38 @@ for i in rootTree:  # проходим по всему дереву
 # print(domains_data)
 
 # Выбор домена
-domain_len = len(domains_data["Domains"])
 # dict - {'Domains': {'Domain': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name':
 # 'Server'}, 'Domain1': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}}}
+
+domain_len = len(domains_data["Domains"])
 if domain_len > 1:
     print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
     for i in domains_data["Domains"]:
         print(list(domains_data["Domains"].keys()).index(i) + 1, i)
     Selected_Domain = DP.select_value(domain_len, 3) - 1
+    Selected_Domain_temp = list(domains_data["Domains"].keys())[DP.select_value(domain_len, 3) - 1]
 else:
     print("Доступен один домен:", list(domains_data["Domains"].keys())[0])
+    Selected_Domain_temp = list(domains_data["Domains"].keys())[0]
     Selected_Domain = 0
-print(domains_data["Domains"][list(domains_data["Domains"].keys())[Selected_Domain]]["node_address"])
+
+print(domains_data["Domains"][Selected_Domain_temp]["domain_address"])
 
 # Выбор развертования
-print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2 '
-      'Удаленное развертывание')
-#Selected_Deployment = DP.select_value(2, 3)
-Selected_Deployment = 1
+# print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2 '
+#       'Удаленное развертывание')
+# #Selected_Deployment = DP.select_value(2, 3)
+# Selected_Deployment = 1
 
-
+# print(domains_data["Domains"][list(domains_data["Domains"].keys())[Selected_Domain]]["domain_address"])
+#print(domains_data["Domains"])
 # if Selected_Deployment == 1:
-#     DP.save_data_to_file("alpha.net.agent.xml",
-#                          DP.gen_local_net_xml(list(domains_data["Domains"].keys())[Selected_Domain], "1010", "1020"))
+#     print(list(domains_data["Domains"].keys())[Selected_Domain])
+#net_xml = DP.gen_net_xml("Remote", list(domains_data["Domains"].keys())[Selected_Domain], "1010", "1020")
+#print(net_xml)
+#DP.save_data_to_file("alpha.net.agent.xml", net_xml)
 
-DP.gen_local_domain_xml()
+# DP.gen_local_domain_xml()
 
 # print(list(domains_data["Domains"].keys())[Selected_Domain])
 

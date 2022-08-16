@@ -10,28 +10,47 @@ import os
 elements = {}
 
 
-def gen_local_net_xml(_Name, _NetEnterPort, _ParentAgentPort):
+def gen_net_xml(_LocalRemote, _DomainName, _NodeName, _NetEnterPort, _ParentAgentPort):
     # root
     # <Alpha.Net.Agent Name="GB_GES" NetEnterPort="1010" ParentAgentPort="1020">
 
     root = ET.Element("Alpha.Net.Agent")
-    root.set("Name", _Name)
-    root.set("NetEnterPort", _NetEnterPort)
-    root.set("ParentAgentPort", _ParentAgentPort)
+
+    if _LocalRemote == "Local":
+        root.set("Name", _NodeName)
+        root.set("NetEnterPort", _NetEnterPort)
+        root.set("ParentAgentPort", _ParentAgentPort)
+    elif _LocalRemote == "Remote":
+        root.set("Name", _DomainName)
+        root.set("NetEnterPort", _NetEnterPort)
+        root.set("ParentAgentPort", _ParentAgentPort)
+        ET.SubElement(root[0], "ChildAgents")
+
+
+
+
+
+
+
+
 
     # root.Options
     ET.SubElement(root, 'Options LoggerLevel="2"')
 
+    # циклом проходим по списку комментариев и добавляем их в xml
     for index, value in enumerate(
-            Comment.listOfnetComments):  # циклом проходим по списку комментариев и добавляем их в xml
+            Comment.listOfnetComments):
         root.insert(index, ET.Comment(value))
+
+    # pretty_xml_as_string
     pretty_xml_as_string = xml.dom.minidom.parseString(
         ET.tostring(root, encoding='utf-8', method='xml',
                     xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" виду
     return pretty_xml_as_string
+#############################
 
 
-def gen_local_domain_xml():
+def gen_domain_xml():
     # root
     # <Alpha.Domain.Agent Name="NDA">
     root = ET.Element("Alpha.Domain.Agent")
@@ -76,11 +95,12 @@ def gen_local_domain_xml():
     # Options LoggerLevel
     ET.SubElement(root, 'Options LoggerLevel="2"')
 
-
     pretty_xml_as_string = xml.dom.minidom.parseString(
         ET.tostring(root, encoding='utf-8', method='xml',
                     xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" в
     print(pretty_xml_as_string)
+#############################
+
 
 def get_data_from_Tree(_domain_address, value_in):
     GV.domain_address = _domain_address
@@ -97,6 +117,7 @@ def get_data_from_Tree(_domain_address, value_in):
             # print("nameServer=", x.get("name"))
             GV.server_name = x.get("name")
         get_data_from_Tree(_domain_address, x)
+#############################
 
 
 def select_value(_maxlength, _attempt):
@@ -110,9 +131,13 @@ def select_value(_maxlength, _attempt):
             print('Необходимо ввести число от 1 до', _maxlength, 'количество попыток', 2 - i, ':')
     else:
         return - 1
+#############################
 
 
 # запись данных в файл
 def save_data_to_file(fileName, textSave):
     with open(fileName, "w") as filetowrite:
         filetowrite.write(textSave)
+#############################
+
+

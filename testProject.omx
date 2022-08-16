@@ -5,7 +5,7 @@
   <link-unit name="PLC" uuid="6a12b73a-5b79-4f54-aa59-6dfd59b93c4e" target="Om.PLC" />
   <dp:domain name="Domain" uuid="7346d053-7a97-44cf-8196-d5dfe13484f6" address="local">
     <dp:domain-node name="ARM" uuid="051fb1e9-fa44-41ad-b217-a3773bd4dba1" address="ARM_1">
-      <eth:ethernet-adapter name="EthernetAdapter" uuid="9c764b25-0539-4fea-b081-b11ca0bf127e" address="127.0.0.1" network="Ethernet" />
+      <eth:ethernet-adapter name="EthernetAdapter" uuid="9c764b25-0539-4fea-b081-b11ca0bf127e" address="192.168.0.1" network="Ethernet" />
       <srv:io-server name="Server" uuid="a5e40cb8-71ad-4ebe-87c6-1b3eab4d2517">
         <srv:opcda-server name="DaServer" uuid="1f942caa-2ac0-4a03-830c-b34836a1513c" />
         <srv:opcaeserver-module name="AeServer" uuid="1f1f4a7d-6861-4991-9264-3e15f3b42af0" />
