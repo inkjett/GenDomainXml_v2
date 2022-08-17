@@ -101,27 +101,23 @@ def gen_domain_xml():
 #############################
 
 
-# def get_data_from_Tree1(_domain_address, value_in):
-#     GV.domain_address = _domain_address
-#     for x in value_in:
-#         if x.tag == "{server}io-server":
-#     if x.tag == "{automation.deployment}domain-node":
-#         # print("ARM_name=", x.get("name"))
-#         # print("ARM_address=", x.get("address"))
-#         GV.node_name = x.get("name")
-#         GV.node_address = x.get("address")
-#     if x.tag == "{automation.ethernet}ethernet-adapter":
-#         # print("addressEthernet=", x.get("address"))
-#         GV.ethernet_address = x.get("address")
-#     if x.tag == "{server}io-server":
-#         # print("nameServer=", x.get("name"))
-#         GV.server_name = x.get("name")
-#     get_data_from_Tree1(_domain_address, x)
-
-def get_data_from_Tree(_valueIn):
-    for x in _valueIn:
+def get_data_from_Tree(_domain_address, value_in):
+    temp = {}
+    GV.domain_address = _domain_address
+    for x in value_in:
+        if x.tag == "{automation.deployment}domain-node":
+            # print("ARM_name=", x.get("name"))
+            # print("ARM_address=", x.get("address"))
+            GV.node_name = x.get("name")
+            GV.node_address = x.get("address")
+        if x.tag == "{automation.ethernet}ethernet-adapter":
+            # print("addressEthernet=", x.get("address"))
+            GV.ethernet_address = x.get("address")
         if x.tag == "{server}io-server":
-            return _valueIn.get("address")
+            # print("nameServer=", x.get("name"))
+            GV.server_name = x.get("name")
+        get_data_from_Tree(_domain_address, x)
+# #############################
 
 #############################
 
