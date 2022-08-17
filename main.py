@@ -8,7 +8,7 @@ import GlobalVariables as GV
 # Переменные
 
 selected_file_name = ""
-rootTree = ""
+RootTree = ""
 domain_Name = ""
 domains_data = {"Domains": {}}
 Selected_Domain = ""
@@ -32,23 +32,21 @@ else:
 # чтение данных из файла
 with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим по всем строкам файла проекта
     tree = ET.parse(f)
-    rootTree = tree.getroot()
+    RootTree = tree.getroot()
 
 # поиск данных домена
-for RootElement in rootTree:  # проходим по всему дереву
+for RootElement in RootTree:  # проходим по всему дереву
     domain_name = ""
-
-    for i in rootTree:  # проходим по всему дереву
-        if i.tag == "{automation.deployment}domain":  # ищем тег с названием домена
-            GV.domain_Name = i.get("name")  # ищем имя домена
-            Data.get_data_from_Tree(i.get("address"), i)  # вызываем рекурсивную функцию по поиску нужных элементов
-            # domains_data["Domains"][GV.domain_Name] = {'domain_address': GV.domain_address,
-            #                                            'node_name': GV.node_name,
-            #                                            'node_address': GV.node_address,
-            #                                            'ethernet_address': GV.ethernet_address,
-            #                                            'server_name': GV.server_name}  # domains_data = {"Domains": {
-            # # }}вставляем в словарь новую строку
-    print(domains_data)
+    if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
+        GV.domain_Name = RootElement.get("name")  # ищем имя домена
+        Data.get_data_from_Tree(RootElement.get("address"), RootElement)  # вызываем рекурсивную функцию по поиску нужных элементов
+        # domains_data["Domains"][GV.domain_Name] = {'domain_address': GV.domain_address,
+        #                                            'node_name': GV.node_name,
+        #                                            'node_address': GV.node_address,
+        #                                            'ethernet_address': GV.ethernet_address,
+        #                                            'server_name': GV.server_name}  # domains_data = {"Domains": {
+        # # }}вставляем в словарь новую строку
+# print(domains_data)
 
 # Выбор домена
 # dict - {'Domains': {'Domain': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name':

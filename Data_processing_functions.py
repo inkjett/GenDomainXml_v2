@@ -102,6 +102,7 @@ def gen_domain_xml():
 
 
 def get_data_from_Tree(_domain_address, value_in):
+    # print(value_in.tag)
     temp = {}
     GV.domain_address = _domain_address
     for x in value_in:
