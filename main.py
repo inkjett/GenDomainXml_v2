@@ -35,47 +35,67 @@ with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим �
     rootTree = tree.getroot()
 
 # поиск данных домена
-for i in rootTree:  # проходим по всему дереву
-    if i.tag == "{automation.deployment}domain":  # ищем тег с названием домена
-        GV.domain_Name = i.get("name")  # ищем имя домена
-        Data.get_data_from_Tree(i.get("address"), i)  # вызываем рекурсивную функцию по поиску нужных элементов
-        domains_data["Domains"][GV.domain_Name] = {'domain_address': GV.domain_address,
-                                                   'node_name': GV.node_name,
-                                                   'node_address': GV.node_address,
-                                                   'ethernet_address': GV.ethernet_address,
-                                                   'server_name': GV.server_name}  # domains_data = {"Domains": {
-        # }}вставляем в словарь новую строку
+for RootElement in rootTree:  # проходим по всему дереву
+    domain_name = ""
+
+    if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
+        domain_name = RootElement.get("name")  # ищем имя домена
+        # print("RootElement=", RootElement)
+        for SubElement in RootElement:
+            if SubElement.tag == "{automation.ethernet}ethernet-net":
+                ethernet_adapter = SubElement.get("address")
+                print("ethernet_adapter=", ethernet_adapter)
+            print("SubElement =", SubElement)
+            if SubElement.tag == "{automation.deployment}domain-node":
+                for SubSubElement in SubElement:
+                    # print("SubSubElement=", SubSubElement)
+                    if SubSubElement.tag == "{server}io-server":
+                        print("Name=", SubSubElement.get("name"))
+
+        #Data.get_data_from_Tree(i.get("address"), i)  # вызываем рекурсивную функцию по поиску нужных элементов
+#         domains_data["Domains"][GV.domain_Name] = {'domain_address': GV.domain_address,
+#                                                    'node_name': GV.node_name,
+#                                                    'node_address': GV.node_address,
+#                                                    'ethernet_address': GV.ethernet_address,
+#                                                    'server_name': GV.server_name}  # domains_data = {"Domains": {
+#         # }}вставляем в словарь новую строку
 print(domains_data)
 
 # Выбор домена
 # dict - {'Domains': {'Domain': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name':
 # 'Server'}, 'Domain1': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}}}
-
-domain_len = len(domains_data["Domains"])
-if domain_len > 1:
-    print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
-    for i in domains_data["Domains"]:
-        print(list(domains_data["Domains"].keys()).index(i) + 1, i)
-    Selected_Domain = list(domains_data["Domains"].keys())[DP.select_value(domain_len, 3) - 1]
-else:
-    Selected_Domain = list(domains_data["Domains"].keys())[0]
-    print("Доступен один домен:", Selected_Domain)
-# print(domains_data["Domains"][Selected_Domain]["domain_address"])
-
-# Выбор развертования
-print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2 '
-      'Удаленное развертывание')
-#Selected_Deployment = DP.select_value(2, 3)
-Selected_Deployment = 2
-
-# print(domains_data["Domains"][list(domains_data["Domains"].keys())[Selected_Domain]]["domain_address"])
-#print(domains_data["Domains"])
-if Selected_Deployment == 1:
-    print(list(domains_data["Domains"].keys())[Selected_Domain])
-elif Selected_Deployment == 2:
-    net_xml = DP.gen_net_xml("Remote",  Selected_Domain, "1010", "1020")
-    print(net_xml)
-    DP.save_data_to_file("alpha.net.agent.xml", net_xml)
+#
+# domain_len = len(domains_data["Domains"])
+# if domain_len > 1:
+#     print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
+#     for i in domains_data["Domains"]:
+#         print(list(domains_data["Domains"].keys()).index(i) + 1, i)
+#     Selected_Domain = list(domains_data["Domains"].keys())[DP.select_value(domain_len, 3) - 1]
+# else:
+#     Selected_Domain = list(domains_data["Domains"].keys())[0]
+#     print("Доступен один домен:", Selected_Domain)
+# # print(domains_data["Domains"][Selected_Domain]["domain_address"])
+#
+# # Выбор развертования
+# print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2 '
+#       'Удаленное развертывание')
+# # Selected_Deployment = DP.select_value(2, 3)
+# Selected_Deployment = 2
+#
+# # print(domains_data["Domains"][list(domains_data["Domains"].keys())[Selected_Domain]]["domain_address"])
+# # print(domains_data["Domains"])
+# domain_address = domains_data["Domains"][Selected_Domain]["domain_address"]
+# node_address = domains_data["Domains"][Selected_Domain]["node_address"]
+# ethernet_address = domains_data["Domains"][Selected_Domain]["ethernet_address"]
+# print(domain_address, node_address, ethernet_address)
+# if Selected_Deployment == 1:
+#     print(list(domains_data["Domains"].keys())[Selected_Domain])
+# elif Selected_Deployment == 2:
+#     net_xml = DP.gen_net_xml("Remote", Selected_Domain, "1010", "1020")  # для удаленного развертования нужно указать
+#     # <Alpha.Net.Agent Name="domain_address">
+#     #
+#     print(net_xml)
+#     DP.save_data_to_file("alpha.net.agent.xml", net_xml)
 
 # DP.gen_local_domain_xml()
 

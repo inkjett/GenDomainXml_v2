@@ -14,6 +14,14 @@
         <srv:tcp-server name="TcpServer" uuid="737e852b-e35c-4f7d-8c4b-dbbe1bc019f9" />
         <srv:history-module name="HistoryModule" uuid="65880d6c-992b-4e6c-9d1c-68f20aeef90a" />
       </srv:io-server>
+      <io-server name="1Server1" xmlns="server" uuid="4382508e-1b5c-4dd9-a7cc-5e79432e03bc">
+        <opcda-server name="DaServer" uuid="a73f7448-91f8-46bc-baea-ff5ee46311dd" />
+        <opcaeserver-module name="AeServer" uuid="c524c4a2-d073-4035-82e4-08d029ed7e1a" />
+        <hda-server name="HdaServer" uuid="4e844ae6-dcdb-4153-8ea4-9c12f94b63a5" />
+        <opcua-module name="UaServer" uuid="04099e91-521c-4359-8ddf-f55809885571" />
+        <tcp-server name="TcpServer" uuid="d22b3113-4fd1-4174-8ddc-2d546dc9d4c0" />
+        <history-module name="HistoryModule" uuid="15c0f0de-71ec-4e56-9ab5-c0048154b160" />
+      </io-server>
     </dp:domain-node>
     <eth:ethernet-net name="Ethernet" uuid="ec063ca5-b7a9-4194-9163-f268758139f6" />
   </dp:domain>

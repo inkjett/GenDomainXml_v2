@@ -17,15 +17,14 @@ def gen_net_xml(_LocalRemote, _DomainAddress, _NodeAddress, _NetEnterPort, _Pare
     root = ET.Element("Alpha.Net.Agent")
 
     if _LocalRemote == "Local":
-        root.set("Name", _NodeName)
+        root.set("Name", _NodeAddress)
         root.set("NetEnterPort", _NetEnterPort)
         root.set("ParentAgentPort", _ParentAgentPort)
     elif _LocalRemote == "Remote":
-        root.set("Name", _DomainName)
+        root.set("Name", _DomainAddress)
         root.set("NetEnterPort", _NetEnterPort)
         root.set("ParentAgentPort", _ParentAgentPort)
-        ET.SubElement(root[0], "ChildAgents")
-
+        ET.SubElement(root, "ChildAgents")
 
 
 
@@ -102,21 +101,28 @@ def gen_domain_xml():
 #############################
 
 
-def get_data_from_Tree(_domain_address, value_in):
-    GV.domain_address = _domain_address
-    for x in value_in:
-        if x.tag == "{automation.deployment}domain-node":
-            # print("ARM_name=", x.get("name"))
-            # print("ARM_address=", x.get("address"))
-            GV.node_name = x.get("name")
-            GV.node_address = x.get("address")
-        if x.tag == "{automation.ethernet}ethernet-adapter":
-            # print("addressEthernet=", x.get("address"))
-            GV.ethernet_address = x.get("address")
+# def get_data_from_Tree1(_domain_address, value_in):
+#     GV.domain_address = _domain_address
+#     for x in value_in:
+#         if x.tag == "{server}io-server":
+#     if x.tag == "{automation.deployment}domain-node":
+#         # print("ARM_name=", x.get("name"))
+#         # print("ARM_address=", x.get("address"))
+#         GV.node_name = x.get("name")
+#         GV.node_address = x.get("address")
+#     if x.tag == "{automation.ethernet}ethernet-adapter":
+#         # print("addressEthernet=", x.get("address"))
+#         GV.ethernet_address = x.get("address")
+#     if x.tag == "{server}io-server":
+#         # print("nameServer=", x.get("name"))
+#         GV.server_name = x.get("name")
+#     get_data_from_Tree1(_domain_address, x)
+
+def get_data_from_Tree(_valueIn):
+    for x in _valueIn:
         if x.tag == "{server}io-server":
-            # print("nameServer=", x.get("name"))
-            GV.server_name = x.get("name")
-        get_data_from_Tree(_domain_address, x)
+            return _valueIn.get("address")
+
 #############################
 
 
