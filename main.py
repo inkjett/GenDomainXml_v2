@@ -54,7 +54,7 @@ else:
     Selected_Domain = list(domains_data["Domains"].keys())[0]
     print("Доступен один домен:", Selected_Domain)
 
-
+Data.gen_net_xml("Remote", domains_data["Domains"][Selected_Domain])
 #
 # # Выбор развертования
 # print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2'

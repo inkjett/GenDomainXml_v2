@@ -10,35 +10,35 @@ import os
 elements = {}
 
 
-def gen_net_xml(_LocalRemote, _DomainAddress, _NodeAddress, _NetEnterPort, _ParentAgentPort):
+def gen_net_xml(_LocalRemote, _DataIn):
     # root
     # <Alpha.Net.Agent Name="GB_GES" NetEnterPort="1010" ParentAgentPort="1020">
 
     root = ET.Element("Alpha.Net.Agent")
+    if _LocalRemote == "Remote":
+        print(_DataIn)
+        # root.set("Name", _NodeAddress)
+        # root.set("NetEnterPort", _NetEnterPort)
+        # root.set("ParentAgentPort", _ParentAgentPort)
+    # if _LocalRemote == "Local":
+    #     root.set("Name", _NodeAddress)
+    #     root.set("NetEnterPort", _NetEnterPort)
+    #     root.set("ParentAgentPort", _ParentAgentPort)
 
-    if _LocalRemote == "Local":
-        root.set("Name", _NodeAddress)
-        root.set("NetEnterPort", _NetEnterPort)
-        root.set("ParentAgentPort", _ParentAgentPort)
-    elif _LocalRemote == "Remote":
-        root.set("Name", _DomainAddress)
-        root.set("NetEnterPort", _NetEnterPort)
-        root.set("ParentAgentPort", _ParentAgentPort)
-        ET.SubElement(root, "ChildAgents")
-
-    # root.Options
-    ET.SubElement(root, 'Options LoggerLevel="2"')
-
-    # циклом проходим по списку комментариев и добавляем их в xml
-    for index, value in enumerate(
-            Comment.listOfnetComments):
-        root.insert(index, ET.Comment(value))
-
-    # pretty_xml_as_string
-    pretty_xml_as_string = xml.dom.minidom.parseString(
-        ET.tostring(root, encoding='utf-8', method='xml',
-                    xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" виду
-    return pretty_xml_as_string
+    #
+    # # root.Options
+    # ET.SubElement(root, 'Options LoggerLevel="2"')
+    #
+    # # циклом проходим по списку комментариев и добавляем их в xml
+    # for index, value in enumerate(
+    #         Comment.listOfnetComments):
+    #     root.insert(index, ET.Comment(value))
+    #
+    # # pretty_xml_as_string
+    # pretty_xml_as_string = xml.dom.minidom.parseString(
+    #     ET.tostring(root, encoding='utf-8', method='xml',
+    #                 xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" виду
+    # return pretty_xml_as_string
 
 
 #############################
@@ -97,17 +97,19 @@ def gen_domain_xml():
 
 
 def get_data_from_Tree(_valueIn, temp=None):
+    print(_valueIn)
     if not temp:
-        temp = {"ethernet-adapter": {}}
+        temp = {"ethernet-adapter": {}, "server_name": []}
     for x in _valueIn:
+        if x.tag == "{automation.deployment}domain":
+            temp.update({x.get("name"): x.get("address")})
         if x.tag == "{automation.deployment}domain-node":
-            # temp.update({x.get("name"): x.get("address")})
             temp.update({"domain_name": x.get("name")})
             temp.update({"domain_address": x.get("address")})
         elif x.tag == "{automation.ethernet}ethernet-adapter":
             temp["ethernet-adapter"][x.get("name")] = x.get("address")
         elif x.tag == "{server}io-server":
-            temp.update({"server_name": x.get("name")})
+            temp["server_name"].append(x.get("name"))
         temp.update(get_data_from_Tree(x, temp))
     return temp
 #############################
