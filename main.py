@@ -39,7 +39,8 @@ for RootElement in RootTree:  # проходим по всему дереву
     domain_name = ""
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
         GV.domain_Name = RootElement.get("name")  # ищем имя домена
-        Data.get_data_from_Tree(RootElement.get("address"), RootElement)  # вызываем рекурсивную функцию по поиску нужных элементов
+        print(RootElement.get("name"))
+        print(Data.get_data_from_Tree(RootElement)) # вызываем рекурсивную функцию по поиску нужных элементов
         # domains_data["Domains"][GV.domain_Name] = {'domain_address': GV.domain_address,
         #                                            'node_name': GV.node_name,
         #                                            'node_address': GV.node_address,

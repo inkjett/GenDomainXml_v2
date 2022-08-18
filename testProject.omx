@@ -22,6 +22,7 @@
         <tcp-server name="TcpServer" uuid="d22b3113-4fd1-4174-8ddc-2d546dc9d4c0" />
         <history-module name="HistoryModule" uuid="15c0f0de-71ec-4e56-9ab5-c0048154b160" />
       </io-server>
+      <ethernet-adapter name="EthernetAdapter1" address="192.168.0.2" network="Ethernet" xmlns="automation.ethernet" uuid="069432c2-4ca0-434d-b975-b005b79f4f59" />
     </dp:domain-node>
     <eth:ethernet-net name="Ethernet" uuid="ec063ca5-b7a9-4194-9163-f268758139f6" />
   </dp:domain>

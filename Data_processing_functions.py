@@ -26,13 +26,6 @@ def gen_net_xml(_LocalRemote, _DomainAddress, _NodeAddress, _NetEnterPort, _Pare
         root.set("ParentAgentPort", _ParentAgentPort)
         ET.SubElement(root, "ChildAgents")
 
-
-
-
-
-
-
-
     # root.Options
     ET.SubElement(root, 'Options LoggerLevel="2"')
 
@@ -46,6 +39,8 @@ def gen_net_xml(_LocalRemote, _DomainAddress, _NodeAddress, _NetEnterPort, _Pare
         ET.tostring(root, encoding='utf-8', method='xml',
                     xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" виду
     return pretty_xml_as_string
+
+
 #############################
 
 
@@ -74,7 +69,7 @@ def gen_domain_xml():
     root[2][0].set("Name", "Server_1")
     root[2][0].set("ServiceName", "Alpha.Server")
     root[2][0].set("DefaultActivation", "1")
-    #root.insert(1, ET.Comment(Comment.domaincomment2))  # вставляем комментарий
+    # root.insert(1, ET.Comment(Comment.domaincomment2))  # вставляем комментарий
     # Server
     # < Server >
     #   < Components StoragePath = "c:\DomainStorage\cache\server" >
@@ -98,28 +93,23 @@ def gen_domain_xml():
         ET.tostring(root, encoding='utf-8', method='xml',
                     xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" в
     print(pretty_xml_as_string)
+
+
 #############################
 
 
-def get_data_from_Tree(_domain_address, value_in):
-    # print(value_in.tag)
-    temp = {}
-    GV.domain_address = _domain_address
+def get_data_from_Tree(value_in, temp=None):
+    if not temp:
+        temp = {"ethernet-adapter": {}}
     for x in value_in:
         if x.tag == "{automation.deployment}domain-node":
-            # print("ARM_name=", x.get("name"))
-            # print("ARM_address=", x.get("address"))
-            GV.node_name = x.get("name")
-            GV.node_address = x.get("address")
-        if x.tag == "{automation.ethernet}ethernet-adapter":
-            # print("addressEthernet=", x.get("address"))
-            GV.ethernet_address = x.get("address")
-        if x.tag == "{server}io-server":
-            # print("nameServer=", x.get("name"))
-            GV.server_name = x.get("name")
-        get_data_from_Tree(_domain_address, x)
-# #############################
-
+            temp.update({x.get("name"): x.get("address")})
+        elif x.tag == "{automation.ethernet}ethernet-adapter":
+            temp["ethernet-adapter"][x.get("name")] = x.get("address")
+        elif x.tag == "{server}io-server":
+            temp.update({"server_name": x.get("name")})
+        temp.update(get_data_from_Tree(x, temp))
+    return temp
 #############################
 
 
@@ -134,6 +124,8 @@ def select_value(_maxlength, _attempt):
             print('Необходимо ввести число от 1 до', _maxlength, 'количество попыток', 2 - i, ':')
     else:
         return - 1
+
+
 #############################
 
 
@@ -142,5 +134,3 @@ def save_data_to_file(fileName, textSave):
     with open(fileName, "w") as filetowrite:
         filetowrite.write(textSave)
 #############################
-
-
