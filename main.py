@@ -36,7 +36,6 @@ with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим �
 for RootElement in RootTree:  # проходим по всему дереву
     domain_name = ""
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
-        GV.domain_Name = RootElement.get("name")  # ищем имя домена
         domains_data["Domains"][RootElement.get("name")] = Data.get_data_from_Tree(RootElement)
 # print(domains_data)
 
