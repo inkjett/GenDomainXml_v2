@@ -93,17 +93,17 @@ def gen_domain_xml():
         ET.tostring(root, encoding='utf-8', method='xml',
                     xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" в
     print(pretty_xml_as_string)
-
-
 #############################
 
 
-def get_data_from_Tree(value_in, temp=None):
+def get_data_from_Tree(_valueIn, temp=None):
     if not temp:
         temp = {"ethernet-adapter": {}}
-    for x in value_in:
+    for x in _valueIn:
         if x.tag == "{automation.deployment}domain-node":
-            temp.update({x.get("name"): x.get("address")})
+            # temp.update({x.get("name"): x.get("address")})
+            temp.update({"domain_name": x.get("name")})
+            temp.update({"domain_address": x.get("address")})
         elif x.tag == "{automation.ethernet}ethernet-adapter":
             temp["ethernet-adapter"][x.get("name")] = x.get("address")
         elif x.tag == "{server}io-server":

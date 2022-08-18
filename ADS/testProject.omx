@@ -26,4 +26,27 @@
     </dp:domain-node>
     <eth:ethernet-net name="Ethernet" uuid="ec063ca5-b7a9-4194-9163-f268758139f6" />
   </dp:domain>
+  <domain name="Domain1" address="local" xmlns="automation.deployment" uuid="c71f1c32-e013-4f28-91cb-f8e90001976d">
+    <domain-node name="ARM22" address="ARM_1" uuid="bd8df722-1ecd-4b4b-8282-a3bebfa79524">
+      <ethernet-adapter name="EthernetAdapter" address="192.168.0.1" network="Ethernet" xmlns="automation.ethernet" uuid="69023a93-4a18-4773-bb79-ba2da350b804" />
+      <io-server name="Server" xmlns="server" uuid="89afa376-5c8e-436a-8fd9-1a818cca24e7">
+        <opcda-server name="DaServer" uuid="365a3c85-a862-4e75-a7e2-4ea44dcc5604" />
+        <opcaeserver-module name="AeServer" uuid="6161b029-f7e1-4228-9f89-6d02c6173524" />
+        <hda-server name="HdaServer" uuid="769a1bb9-ba49-4897-915b-47ff2a9d83b9" />
+        <opcua-module name="UaServer" uuid="a7f6dfcc-ec64-46de-a588-7545d84ab9bf" />
+        <tcp-server name="TcpServer" uuid="06a6445d-7b31-48f6-b145-9b1f9838264d" />
+        <history-module name="HistoryModule" uuid="5bcf6564-251d-406e-8db2-48b809f0e04a" />
+      </io-server>
+      <io-server name="1Server1" xmlns="server" uuid="30862ee2-f845-4836-8d16-42a9d4ecca04">
+        <opcda-server name="DaServer" uuid="8812223c-3e6b-493d-b43d-ddecaed7f4fa" />
+        <opcaeserver-module name="AeServer" uuid="ea6740e8-f559-4853-a2f0-89195d0dd392" />
+        <hda-server name="HdaServer" uuid="6269840c-24c9-4801-a32b-449b2913f70b" />
+        <opcua-module name="UaServer" uuid="f7a9b6c3-146c-453f-a941-7f572261bb06" />
+        <tcp-server name="TcpServer" uuid="3e7524de-0397-4cdd-8186-ec36566ebc80" />
+        <history-module name="HistoryModule" uuid="eafae9c2-43e9-44c8-a85c-da9568e48588" />
+      </io-server>
+      <ethernet-adapter name="EthernetAdapter1" address="192.168.0.2" network="Ethernet" xmlns="automation.ethernet" uuid="1babad0b-f233-455c-b167-dd9aed5544d7" />
+    </domain-node>
+    <ethernet-net name="Ethernet" xmlns="automation.ethernet" uuid="cbb005e4-f46c-4d90-bace-1687367551c0" />
+  </domain>
 </omx>

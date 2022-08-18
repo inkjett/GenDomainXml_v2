@@ -1,12 +1,10 @@
 import Data_processing_functions as Data
-import GlobalVariables
 import os
 import Data_processing_functions as DP
 import xml.etree.ElementTree as ET  # подключаем The ElementTree XML
 import GlobalVariables as GV
 
 # Переменные
-
 selected_file_name = ""
 RootTree = ""
 domain_Name = ""
@@ -39,33 +37,28 @@ for RootElement in RootTree:  # проходим по всему дереву
     domain_name = ""
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
         GV.domain_Name = RootElement.get("name")  # ищем имя домена
-        print(RootElement.get("name"))
-        print(Data.get_data_from_Tree(RootElement)) # вызываем рекурсивную функцию по поиску нужных элементов
-        # domains_data["Domains"][GV.domain_Name] = {'domain_address': GV.domain_address,
-        #                                            'node_name': GV.node_name,
-        #                                            'node_address': GV.node_address,
-        #                                            'ethernet_address': GV.ethernet_address,
-        #                                            'server_name': GV.server_name}  # domains_data = {"Domains": {
-        # # }}вставляем в словарь новую строку
+        domains_data["Domains"][RootElement.get("name")] = Data.get_data_from_Tree(RootElement)
 # print(domains_data)
 
 # Выбор домена
-# dict - {'Domains': {'Domain': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name':
-# 'Server'}, 'Domain1': {'domain_address': 'local', 'ethernet_address': '127.0.0.1', 'server_name': 'Server'}}}
-#
-# domain_len = len(domains_data["Domains"])
-# if domain_len > 1:
-#     print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
-#     for i in domains_data["Domains"]:
-#         print(list(domains_data["Domains"].keys()).index(i) + 1, i)
-#     Selected_Domain = list(domains_data["Domains"].keys())[DP.select_value(domain_len, 3) - 1]
-# else:
-#     Selected_Domain = list(domains_data["Domains"].keys())[0]
-#     print("Доступен один домен:", Selected_Domain)
-# # print(domains_data["Domains"][Selected_Domain]["domain_address"])
+# dict - {'Domains': {'Domain': {'ethernet-adapter': {'EthernetAdapter': '192.168.0.1',
+# 'EthernetAdapter1': '192.168.0.2'}, 'domain_name': 'ARM', 'domain_address': 'ARM_1', 'server_name': '1Server1'},
+# 'Domain1': {'ethernet-adapter': {'EthernetAdapter': '192.168.0.1', 'EthernetAdapter1': '192.168.0.2'},
+# 'domain_name': 'ARM22', 'domain_address': 'ARM_1', 'server_name': '1Server1'}}}
+domain_len = len(domains_data["Domains"])
+if domain_len > 1:
+    print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
+    for i in domains_data["Domains"]:
+        print(list(domains_data["Domains"].keys()).index(i) + 1, i)
+    Selected_Domain = list(domains_data["Domains"].keys())[DP.select_value(domain_len, 3) - 1]
+else:
+    Selected_Domain = list(domains_data["Domains"].keys())[0]
+    print("Доступен один домен:", Selected_Domain)
+
+
 #
 # # Выбор развертования
-# print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2 '
+# print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2'
 #       'Удаленное развертывание')
 # # Selected_Deployment = DP.select_value(2, 3)
 # Selected_Deployment = 2
