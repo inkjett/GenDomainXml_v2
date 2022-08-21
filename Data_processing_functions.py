@@ -97,7 +97,7 @@ def gen_domain_xml():
 
 
 def get_data_from_Tree(_valueIn, temp=None):
-    print(_valueIn)
+    # print(_valueIn)
     if not temp:
         temp = {"ethernet-adapter": {}, "server_name": []}
     for x in _valueIn:

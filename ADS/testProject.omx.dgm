@@ -7,9 +7,11 @@
     <domain Id="7346d053-7a97-44cf-8196-d5dfe13484f6" Left="590.23" Top="40" Width="106.51" Height="90.63" />
     <domain Id="c71f1c32-e013-4f28-91cb-f8e90001976d" Left="603.23" Top="149" Width="106.51" Height="90.63" />
   </omx>
-  <domain-node Id="051fb1e9-fa44-41ad-b217-a3773bd4dba1" OffsetX="0" OffsetY="0" Scale="1">
-    <ethernet-adapter Id="Domain.ARM.EthernetAdapter" Left="1142.00666666667" Top="246.220984554291" Width="137.993333333333" Height="45.63" />
-    <io-server Id="Domain.ARM.Server" Left="20" Top="20" Width="94.7133333333333" Height="152" />
+  <domain-node Id="051fb1e9-fa44-41ad-b217-a3773bd4dba1" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <ethernet-adapter Id="9c764b25-0539-4fea-b081-b11ca0bf127e" Left="1142.00666666667" Top="276.536672153473" Width="137.993333333333" Height="45.63" />
+    <io-server Id="a5e40cb8-71ad-4ebe-87c6-1b3eab4d2517" Left="30" Top="30" Width="114.616666666667" Height="152" />
+    <io-server Id="4382508e-1b5c-4dd9-a7cc-5e79432e03bc" Left="204.616666666667" Top="30" Width="121.086666666667" Height="152" />
+    <ethernet-adapter Id="069432c2-4ca0-434d-b975-b005b79f4f59" Left="1135.53666666667" Top="342.166672153473" Width="144.463333333333" Height="45.63" />
   </domain-node>
   <domain Id="7346d053-7a97-44cf-8196-d5dfe13484f6" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
     <domain-node Id="051fb1e9-fa44-41ad-b217-a3773bd4dba1" Left="42" Top="50" Width="118.993333333333" Height="76" />
@@ -23,4 +25,5 @@
     <tcp-server Id="737e852b-e35c-4f7d-8c4b-dbbe1bc019f9" Left="1142.09666666667" Top="332.52" Width="113.903333333333" Height="36.63" />
     <history-module Id="65880d6c-992b-4e6c-9d1c-68f20aeef90a" Left="66" Top="269.52" Width="152.443333333333" Height="99.63" />
   </io-server>
+  <domain-node Id="5c1e5d50-f60e-4d89-ab74-5d9b06010dec" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
 </Diagrams>

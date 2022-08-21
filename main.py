@@ -34,27 +34,32 @@ with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим �
 
 # поиск данных домена
 for RootElement in RootTree:  # проходим по всему дереву
-    domain_name = ""
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
-        domains_data["Domains"][RootElement.get("name")] = Data.get_data_from_Tree(RootElement)
-# print(domains_data)
+        temp1 = {RootElement.get("name"):{}}
+        for NodeElement in RootElement:
+            if NodeElement.tag == "{automation.deployment}domain-node":
+                temp_domains_data = {}
+                temp_domains_data[NodeElement.get("name")] = Data.get_data_from_Tree(NodeElement)
+                temp1[RootElement.get("name")].update(temp_domains_data)
+                domains_data["Domains"].update(temp1)
+print(domains_data)
 
 # Выбор домена
 # dict - {'Domains': {'Domain': {'ethernet-adapter': {'EthernetAdapter': '192.168.0.1',
 # 'EthernetAdapter1': '192.168.0.2'}, 'domain_name': 'ARM', 'domain_address': 'ARM_1', 'server_name': '1Server1'},
 # 'Domain1': {'ethernet-adapter': {'EthernetAdapter': '192.168.0.1', 'EthernetAdapter1': '192.168.0.2'},
 # 'domain_name': 'ARM22', 'domain_address': 'ARM_1', 'server_name': '1Server1'}}}
-domain_len = len(domains_data["Domains"])
-if domain_len > 1:
-    print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
-    for i in domains_data["Domains"]:
-        print(list(domains_data["Domains"].keys()).index(i) + 1, i)
-    Selected_Domain = list(domains_data["Domains"].keys())[DP.select_value(domain_len, 3) - 1]
-else:
-    Selected_Domain = list(domains_data["Domains"].keys())[0]
-    print("Доступен один домен:", Selected_Domain)
-
-Data.gen_net_xml("Remote", domains_data["Domains"][Selected_Domain])
+# domain_len = len(domains_data["Domains"])
+# if domain_len > 1:
+#     print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
+#     for i in domains_data["Domains"]:
+#         print(list(domains_data["Domains"].keys()).index(i) + 1, i)
+#     Selected_Domain = list(domains_data["Domains"].keys())[DP.select_value(domain_len, 3) - 1]
+# else:
+#     Selected_Domain = list(domains_data["Domains"].keys())[0]
+#     print("Доступен один домен:", Selected_Domain)
+#
+# Data.gen_net_xml("Remote", domains_data["Domains"][Selected_Domain])
 #
 # # Выбор развертования
 # print('Сгенерировать xml для локального развертывания конфигурации или для удаленного ?\n1 Локальное развертывание\n2'
