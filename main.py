@@ -35,13 +35,13 @@ with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим �
 # поиск данных домена
 for RootElement in RootTree:  # проходим по всему дереву
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
-        temp1 = {RootElement.get("name"):{}}
+        DomainName = {RootElement.get("name"):{}}
         for NodeElement in RootElement:
             if NodeElement.tag == "{automation.deployment}domain-node":
-                temp_domains_data = {}
-                temp_domains_data[NodeElement.get("name")] = Data.get_data_from_Tree(NodeElement)
-                temp1[RootElement.get("name")].update(temp_domains_data)
-                domains_data["Domains"].update(temp1)
+                nodes_data = {}
+                nodes_data[NodeElement.get("name")] = Data.get_data_from_Tree(NodeElement)
+                DomainName[RootElement.get("name")].update(nodes_data)
+                domains_data["Domains"].update(DomainName)
 print(domains_data)
 
 # Выбор домена
