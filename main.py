@@ -33,9 +33,17 @@ with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим �
     RootTree = tree.getroot()
 
 # поиск данных домена
+# {'Domains': {'Domain': {'ARM': {'ethernet-adapter': ['192.168.1.1', '192.168.1.2'],
+# 'server_name': ['AlphaServer', 'AlphaServer2']}}, 'domain_address': 'local'}}
+# Domain - имя домена из поля Имя элемента Alpha.Domain
+# ARM - имя ноды из полня Имя эелемента Узел Alpha.Domain
+# ethernet-adapter - IP дреса элемнат адаптер Ethernet в ARM
+# server_name - название Alpha.Server в ARM
+# domain_address - адрес домена из поля Адресс элемента Alpha.Domain
+
 for RootElement in RootTree:  # проходим по всему дереву
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
-        DomainName = {RootElement.get("name"):{}}
+        DomainName = {RootElement.get("name"): {}, "domain_address": RootElement.get("address")}
         for NodeElement in RootElement:
             if NodeElement.tag == "{automation.deployment}domain-node":
                 nodes_data = {}
@@ -45,10 +53,6 @@ for RootElement in RootTree:  # проходим по всему дереву
 print(domains_data)
 
 # Выбор домена
-# dict - {'Domains': {'Domain': {'ethernet-adapter': {'EthernetAdapter': '192.168.0.1',
-# 'EthernetAdapter1': '192.168.0.2'}, 'domain_name': 'ARM', 'domain_address': 'ARM_1', 'server_name': '1Server1'},
-# 'Domain1': {'ethernet-adapter': {'EthernetAdapter': '192.168.0.1', 'EthernetAdapter1': '192.168.0.2'},
-# 'domain_name': 'ARM22', 'domain_address': 'ARM_1', 'server_name': '1Server1'}}}
 # domain_len = len(domains_data["Domains"])
 # if domain_len > 1:
 #     print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
