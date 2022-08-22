@@ -1,13 +1,6 @@
 import xml.etree.ElementTree as ET  # подключаем The ElementTree XML
 import CommentForXml as Comment
 import xml.dom.minidom
-import GlobalVariables as GV
-import os
-
-# словарь
-# elements = {"element1": {"armName": "", "ethernet-adapter": "", "ethernet-adapter_1": "", "io-server": ""},
-#             "element2": {"armName": "", "ethernet-adapter": "", "ethernet-adapter_1": "", "io-server": ""}}
-elements = {}
 
 
 def gen_net_xml(_LocalRemote, _DataIn):
@@ -39,8 +32,6 @@ def gen_net_xml(_LocalRemote, _DataIn):
     #     ET.tostring(root, encoding='utf-8', method='xml',
     #                 xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" виду
     # return pretty_xml_as_string
-
-
 #############################
 
 
@@ -126,8 +117,6 @@ def select_value(_maxlength, _attempt):
             print('Необходимо ввести число от 1 до', _maxlength, 'количество попыток', 2 - i, ':')
     else:
         return - 1
-
-
 #############################
 
 

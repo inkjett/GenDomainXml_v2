@@ -25,5 +25,9 @@
       <ethernet-adapter name="EthernetAdapter1" address="192.168.1.2" network="Ethernet" xmlns="automation.ethernet" uuid="069432c2-4ca0-434d-b975-b005b79f4f59" />
     </dp:domain-node>
     <eth:ethernet-net name="Ethernet" uuid="ec063ca5-b7a9-4194-9163-f268758139f6" />
+    <dp:domain-node name="NoASode" uuid="43e8b689-8ce7-49f7-819f-2e019e4e1159">
+      <eth:ethernet-adapter name="EthernetAdapter" uuid="a67db0fe-7570-4417-b7c9-ad8172635245" address="192.168.12.12" network="Ethernet" />
+      <dp:external-runtime name="Runtime" uuid="9e1a9e87-d5ae-415b-8c24-06389993b27e" />
+    </dp:domain-node>
   </dp:domain>
 </omx>

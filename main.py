@@ -1,3 +1,4 @@
+import json
 import Data_processing_functions as Data
 import os
 import Data_processing_functions as DP
@@ -41,6 +42,7 @@ with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим �
 # server_name - название Alpha.Server в ARM
 # domain_address - адрес домена из поля Адресс элемента Alpha.Domain
 
+# Далее будет откровенный "колхоз", просто чтобы работало
 for RootElement in RootTree:  # проходим по всему дереву
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
         DomainName = {RootElement.get("name"): {"domain_address": RootElement.get("address")}}
@@ -50,8 +52,15 @@ for RootElement in RootTree:  # проходим по всему дереву
                 nodes_data[NodeElement.get("name")] = Data.get_data_from_Tree(NodeElement)
                 DomainName[RootElement.get("name")].update(nodes_data)
                 domains_data["Domains"].update(DomainName)
-print(domains_data)
-
+# print(domains_data)
+for Elements in domains_data["Domains"]:
+    for SubElements in domains_data["Domains"][Elements]:
+        #print(domains_data.get("Domains")[Elements].keys())
+        if isinstance(domains_data.get("Domains")[Elements][SubElements], str) == False:
+            print(SubElements)
+            print(len(domains_data.get("Domains")[Elements][SubElements].get("server_name")))
+            del domains_data["Domains"][Elements][SubElements]
+print(domains_data["Domains"])
 # Выбор домена
 domain_len = len(domains_data["Domains"])
 if domain_len > 1:
@@ -62,6 +71,9 @@ if domain_len > 1:
 else:
     Selected_Domain = list(domains_data["Domains"].keys())[0]
     print("Доступен один домен:", Selected_Domain)
+
+
+
 #
 # Data.gen_net_xml("Remote", domains_data["Domains"][Selected_Domain])
 #
