@@ -32,6 +32,8 @@ def gen_net_xml(_LocalRemote, _DataIn):
     #     ET.tostring(root, encoding='utf-8', method='xml',
     #                 xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" виду
     # return pretty_xml_as_string
+
+
 #############################
 
 
@@ -124,4 +126,16 @@ def select_value(_maxlength, _attempt):
 def save_data_to_file(fileName, textSave):
     with open(fileName, "w") as filetowrite:
         filetowrite.write(textSave)
+#############################
+
+
+# Удаляем ноды в которых нет серверов Alpha.Server
+def delete_do_not_contain_AS_node(_ValueIn, _DomainIn):
+    delete_nodes = []
+    for Elements in _ValueIn["Domains"]:
+        for SubElements in _ValueIn["Domains"][Elements]:
+            if isinstance(_ValueIn.get("Domains")[Elements][SubElements], str) == False:
+                if len(_ValueIn.get("Domains")[Elements][SubElements].get("server_name")) == 0:
+                    delete_nodes.append(SubElements)
+    return delete_nodes
 #############################

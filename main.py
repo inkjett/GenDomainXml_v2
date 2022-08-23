@@ -52,15 +52,8 @@ for RootElement in RootTree:  # проходим по всему дереву
                 nodes_data[NodeElement.get("name")] = Data.get_data_from_Tree(NodeElement)
                 DomainName[RootElement.get("name")].update(nodes_data)
                 domains_data["Domains"].update(DomainName)
-# print(domains_data)
-for Elements in domains_data["Domains"]:
-    for SubElements in domains_data["Domains"][Elements]:
-        #print(domains_data.get("Domains")[Elements].keys())
-        if isinstance(domains_data.get("Domains")[Elements][SubElements], str) == False:
-            print(SubElements)
-            print(len(domains_data.get("Domains")[Elements][SubElements].get("server_name")))
-            del domains_data["Domains"][Elements][SubElements]
-print(domains_data["Domains"])
+print(domains_data)
+
 # Выбор домена
 domain_len = len(domains_data["Domains"])
 if domain_len > 1:
@@ -71,6 +64,22 @@ if domain_len > 1:
 else:
     Selected_Domain = list(domains_data["Domains"].keys())[0]
     print("Доступен один домен:", Selected_Domain)
+
+
+
+
+delete_nodes = []
+for Elements in domains_data["Domains"]:
+    for SubElements in domains_data["Domains"][Elements]:
+        if isinstance(domains_data.get("Domains")[Elements][SubElements], str) == False:
+            if len(domains_data.get("Domains")[Elements][SubElements].get("server_name")) == 0:
+                delete_nodes.append(SubElements)
+
+for i in delete_nodes:
+    del domains_data["Domains"][Elements][i]
+
+print(domains_data)
+
 
 
 

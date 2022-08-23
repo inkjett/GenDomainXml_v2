@@ -1,17 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Diagrams>
-  <omx Id="4c11e6a8-e6e9-4933-80cc-ec9ed9cbce5c" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
-    <link-unit Id="2d7f95c0-e98a-4c51-943e-9821ac852613" Left="40" Top="40" Width="150.463333333333" Height="36.63" />
-    <link-unit Id="85b6d6ff-31a5-4e68-a463-0a1543cc69f3" Left="230.463333333333" Top="40" Width="145.943333333333" Height="36.63" />
-    <link-unit Id="6a12b73a-5b79-4f54-aa59-6dfd59b93c4e" Left="416.406666666667" Top="40" Width="133.823333333333" Height="36.63" />
-    <domain Id="7346d053-7a97-44cf-8196-d5dfe13484f6" Left="590.23" Top="40" Width="106.51" Height="90.63" />
-  </omx>
+  <omx Id="4c11e6a8-e6e9-4933-80cc-ec9ed9cbce5c" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
   <domain-node Id="051fb1e9-fa44-41ad-b217-a3773bd4dba1" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
-  <domain Id="7346d053-7a97-44cf-8196-d5dfe13484f6" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
-    <domain-node Id="051fb1e9-fa44-41ad-b217-a3773bd4dba1" Left="42" Top="50" Width="118.993333333333" Height="76" />
-    <ethernet-net Id="ec063ca5-b7a9-4194-9163-f268758139f6" Left="342.5" Top="20" Width="216.006666666667" Height="83.59" />
-    <domain-node Id="43e8b689-8ce7-49f7-819f-2e019e4e1159" Left="338" Top="263.08" Width="150" Height="100" />
-  </domain>
+  <domain Id="7346d053-7a97-44cf-8196-d5dfe13484f6" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
   <io-server Id="a5e40cb8-71ad-4ebe-87c6-1b3eab4d2517" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
     <opcda-server Id="1f942caa-2ac0-4a03-830c-b34836a1513c" Left="1138.82333333333" Top="26" Width="117.176666666667" Height="36.63" />
     <opcaeserver-module Id="1f1f4a7d-6861-4991-9264-3e15f3b42af0" Left="1140.97333333333" Top="102.63" Width="115.026666666667" Height="36.63" />
