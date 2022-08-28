@@ -58,10 +58,8 @@ for RootElement in RootTree:  # проходим по всему дереву
 # Выбор домена
 domain_len = len(domains_data["Domains"])
 if domain_len > 1:
-    print("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)\nДоступные домены:")
-    for i in domains_data["Domains"]:
-        print(list(domains_data["Domains"].keys()).index(i) + 1, i)
-    Selected_Domain = list(domains_data["Domains"].keys())[DP.select_value(domain_len, 3) - 1]
+    Selected_Domain = DP.select_unit("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)",
+                                     domains_data, "Domains")
 else:
     Selected_Domain = list(domains_data["Domains"].keys())[0]
     print("Доступен один домен:", Selected_Domain)
@@ -73,9 +71,10 @@ for Elements in domains_data["Domains"]:
         if isinstance(domains_data.get("Domains")[Elements][SubElements], str) == False:
             if len(domains_data.get("Domains")[Elements][SubElements].get("server_name")) == 0:
                 delete_nodes.append(SubElements)
+for i in delete_nodes:
+    if i in domains_data["Domains"][Elements]:
+        del domains_data["Domains"][Elements][i]
 
-# for i in delete_nodes:
-#     del domains_data["Domains"][Elements][i]
 # print(domains_data)
 
 # Выбор развертования
@@ -83,8 +82,8 @@ print('Сгенерировать xml для локального разверт
       ' Удаленное развертывание')
 Selected_Deployment = DP.select_value(2, 3)
 if Selected_Deployment == 1:
-    Selected_Node = DP.select_unit("Необходимо выбрать Узел для которого будут сгенерированы xml", domains_data, "Domains",
-                   Selected_Domain)
+    Selected_Node = DP.select_unit("Необходимо выбрать Узел для которого будут сгенерированы xml", domains_data,
+                                   "Domains", Selected_Domain)
 print(Selected_Node)
 # # print(domains_data["Domains"][list(domains_data["Domains"].keys())[Selected_Domain]]["domain_address"])
 # # print(domains_data["Domains"])

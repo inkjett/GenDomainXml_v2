@@ -152,13 +152,16 @@ def delete_do_not_contain_AS_node(_ValueIn, _DomainName):
 
 # Выбор элемента внутри словаря, доделать сделано только для else
 def select_unit(_textIn, _dictIn, _elementOne=None, _elementTwo=None):
-    print(_textIn)
-    if not _elementTwo or not _elementOne:  # весь словарь _dictIn
+    #print(_dictIn)
+    print(_textIn, "Доступные эелементы:")
+    if not _elementTwo and not _elementOne:  # весь словарь _dictIn
         for i in _dictIn:
             print(list(_dictIn.keys()).index(i) + 1, i)
     if not _elementTwo:  # один уровень внутрь словаря _dictIn
         for i in _dictIn[_elementOne]:
-            print(list(_dictIn[_elementOne].keys()).index(i) + 1, i)
+            unit_len = len(_dictIn[_elementOne])
+            [print(list(_dictIn[_elementOne].keys()).index(i) + 1, i)]
+        return list(_dictIn[_elementOne].keys())[select_value(unit_len, 3) - 1]
     else:  # два уровня внутрь словаря _dictIn
         for i in _dictIn[_elementOne][_elementTwo]:
             unit_len = len(_dictIn[_elementOne][_elementTwo])

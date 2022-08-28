@@ -58,4 +58,59 @@
       <ethernet-adapter name="EthernetAdapter1" address="192.168.1.2" network="Ethernet" xmlns="automation.ethernet" uuid="c1946286-3b26-4c5b-a408-f0c0574c1398" />
     </domain-node>
   </dp:domain>
+  <domain name="Domain1" address="local" xmlns="automation.deployment" uuid="3136d771-310e-4f61-abd5-c0d3184e7d24">
+    <domain-node name="ARM" address="ARM_11" uuid="98594204-3404-4ae1-bdb5-6770aa49ab91">
+      <ethernet-adapter name="EthernetAdapter" address="192.168.1.1" network="Ethernet" xmlns="automation.ethernet" uuid="9c486e5e-d9b0-456c-8084-775f2b165fc4" />
+      <io-server name="AlphaServer" xmlns="server" uuid="a920b355-0b5e-463f-826e-3c54f08b740a">
+        <opcda-server name="DaServer" uuid="bf8e3374-a8aa-4cc4-bff7-30218226257b" />
+        <opcaeserver-module name="AeServer" uuid="dc42a12e-1632-41b9-8534-fa85c826941f" />
+        <hda-server name="HdaServer" uuid="87f9e70a-2f1c-46c0-871a-e29cfe950606" />
+        <opcua-module name="UaServer" uuid="9a4bf7b4-333c-462f-8025-5c9f9d3a1088" />
+        <tcp-server name="TcpServer" uuid="690aabb4-2118-404f-8e0c-097def90168b" />
+        <history-module name="HistoryModule" uuid="d7993be4-4f4e-4b1c-901d-6f58b6ecddce" />
+      </io-server>
+      <io-server name="AlphaServer2" xmlns="server" uuid="2c41b229-41e4-4f70-b611-764b7dc43bc0">
+        <opcda-server name="DaServer" uuid="7982775a-4cf3-4e9b-8f5f-de325ee3e8af" />
+        <opcaeserver-module name="AeServer" uuid="5b13d87b-12c9-4472-ac30-ed4874dcd624" />
+        <hda-server name="HdaServer" uuid="1001dbf6-48f3-4468-9bda-55aa4db05e49" />
+        <opcua-module name="UaServer" uuid="e9a667f1-1264-4371-9956-19ae50bf28d1" />
+        <tcp-server name="TcpServer" uuid="9e639597-9060-47aa-983d-28920fd92d0d" />
+        <history-module name="HistoryModule" uuid="2e7b801a-198d-43b9-9398-6fa7c568486e" />
+      </io-server>
+      <ethernet-adapter name="EthernetAdapter1" address="192.168.1.2" network="Ethernet" xmlns="automation.ethernet" uuid="dca2c9ac-c133-48e1-ad17-e7a94f210723" />
+    </domain-node>
+    <ethernet-net name="Ethernet" xmlns="automation.ethernet" uuid="7be20f42-5a24-4c4f-8cc5-cdc3216b6c24" />
+    <domain-node name="NoASode" uuid="6860c772-d8cd-4ee5-aba8-d977917693c8">
+      <ethernet-adapter name="EthernetAdapter" address="192.168.12.12" network="Ethernet" xmlns="automation.ethernet" uuid="9a89223d-0f0d-4b25-a48b-21dfd138527f" />
+      <external-runtime name="Runtime" uuid="938fe4e3-7d47-4cda-b8e5-7cc8b0ae4a16" />
+    </domain-node>
+    <domain-node name="NoASode2" xmlns="automation.deployment" uuid="d9c31833-c431-43d3-8372-bda3fc646b6f">
+      <ethernet-adapter name="EthernetAdapter" address="192.168.12.12" network="Ethernet" xmlns="automation.ethernet" uuid="43814a55-27ef-49e7-9629-a8d4086f8e8c" />
+      <external-runtime name="Runtime" uuid="cc6b7042-bca9-4475-9467-488a3c2ff280" />
+    </domain-node>
+    <domain-node name="NoASode3" xmlns="automation.deployment" uuid="6eabcf24-608f-4b5a-85fb-10049c631c4d">
+      <ethernet-adapter name="EthernetAdapter" address="192.168.12.12" network="Ethernet" xmlns="automation.ethernet" uuid="1f16360d-95f7-467e-aa46-be75afcc3aa8" />
+      <external-runtime name="Runtime" uuid="3d42c021-a6b1-452c-b7c6-f1e63a1deddf" />
+    </domain-node>
+    <domain-node name="ARM1" address="ARM_11" xmlns="automation.deployment" uuid="d694a864-072c-4558-a8ab-dc2459bee494">
+      <ethernet-adapter name="EthernetAdapter" address="192.168.1.1" network="Ethernet" xmlns="automation.ethernet" uuid="10c5259a-e188-46a3-b65c-fc0d1412d14c" />
+      <io-server name="AlphaServer" xmlns="server" uuid="163ce2fa-cfee-493f-bc61-ddd104ca4c08">
+        <opcda-server name="DaServer" uuid="f67ff3b8-2761-4eb3-bcce-a6e08458467b" />
+        <opcaeserver-module name="AeServer" uuid="3bb17cf1-c172-44ae-b6b1-4c0acfccb24b" />
+        <hda-server name="HdaServer" uuid="926493cc-5680-4ac4-922a-5711044767ab" />
+        <opcua-module name="UaServer" uuid="228c3bcb-39bc-4cfc-a586-eba5498a5772" />
+        <tcp-server name="TcpServer" uuid="471a7d36-67d9-4574-95be-1cbf553b8823" />
+        <history-module name="HistoryModule" uuid="ec603bff-b0b7-4dd5-aa59-3dfafb838245" />
+      </io-server>
+      <io-server name="AlphaServer2" xmlns="server" uuid="9b5b6e6c-583b-466e-b7e4-5e1bd5510c1d">
+        <opcda-server name="DaServer" uuid="88aae70b-9970-42c0-9d91-fff200c3d1e1" />
+        <opcaeserver-module name="AeServer" uuid="27402b00-08c0-47fc-897d-d1bbccc98ced" />
+        <hda-server name="HdaServer" uuid="44743a71-8469-4ed3-95b4-2c0f13235a80" />
+        <opcua-module name="UaServer" uuid="2722e086-f66b-4ffc-a5db-d8e30aff4574" />
+        <tcp-server name="TcpServer" uuid="9d47e449-a701-4f71-8223-2865498ff59f" />
+        <history-module name="HistoryModule" uuid="d031e1c1-3bde-41d0-8e3f-7e18b2290188" />
+      </io-server>
+      <ethernet-adapter name="EthernetAdapter1" address="192.168.1.2" network="Ethernet" xmlns="automation.ethernet" uuid="4a4f9255-9063-4750-bfd7-d7031231018e" />
+    </domain-node>
+  </domain>
 </omx>
