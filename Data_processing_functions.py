@@ -86,6 +86,8 @@ def gen_domain_xml():
         ET.tostring(root, encoding='utf-8', method='xml',
                     xml_declaration=True).decode('UTF-8')).toprettyxml()  # приводим xml к "нормальному" в
     print(pretty_xml_as_string)
+
+
 #############################
 
 
@@ -105,6 +107,8 @@ def get_data_from_Tree(_valueIn, temp=None):
             temp["server_name"].append(x.get("name"))
         temp.update(get_data_from_Tree(x, temp))
     return temp
+
+
 #############################
 
 
@@ -119,6 +123,8 @@ def select_value(_maxlength, _attempt):
             print('Необходимо ввести число от 1 до', _maxlength, 'количество попыток', 2 - i, ':')
     else:
         return - 1
+
+
 #############################
 
 
@@ -126,16 +132,35 @@ def select_value(_maxlength, _attempt):
 def save_data_to_file(fileName, textSave):
     with open(fileName, "w") as filetowrite:
         filetowrite.write(textSave)
+
+
 #############################
 
 
-# Удаляем ноды в которых нет серверов Alpha.Server
-def delete_do_not_contain_AS_node(_ValueIn, _DomainIn):
+# Удаляем ноды в которых нет серверов Alpha.Server - пока не используется
+def delete_do_not_contain_AS_node(_ValueIn, _DomainName):
     delete_nodes = []
-    for Elements in _ValueIn["Domains"]:
+    for Elements in _ValueIn["Domains"][_DomainName]:
         for SubElements in _ValueIn["Domains"][Elements]:
             if isinstance(_ValueIn.get("Domains")[Elements][SubElements], str) == False:
                 if len(_ValueIn.get("Domains")[Elements][SubElements].get("server_name")) == 0:
                     delete_nodes.append(SubElements)
     return delete_nodes
+
+
 #############################
+
+# Выбор элемента внутри словаря, доделать сделано только для else
+def select_unit(_textIn, _dictIn, _elementOne=None, _elementTwo=None):
+    print(_textIn)
+    if not _elementTwo or not _elementOne:  # весь словарь _dictIn
+        for i in _dictIn:
+            print(list(_dictIn.keys()).index(i) + 1, i)
+    if not _elementTwo:  # один уровень внутрь словаря _dictIn
+        for i in _dictIn[_elementOne]:
+            print(list(_dictIn[_elementOne].keys()).index(i) + 1, i)
+    else:  # два уровня внутрь словаря _dictIn
+        for i in _dictIn[_elementOne][_elementTwo]:
+            unit_len = len(_dictIn[_elementOne][_elementTwo])
+            [print(list(_dictIn[_elementOne][_elementTwo].keys()).index(i) + 1, i)]
+        return list(_dictIn[_elementOne][_elementTwo].keys())[select_value(unit_len, 3) - 1]
