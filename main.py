@@ -35,9 +35,11 @@ with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим �
     RootTree = tree.getroot()
 
 # поиск данных домена
-# {'Domains': {'Domain': {'domain_address': 'local', 'ARM': {'ethernet-adapter': ['192.168.1.1', '192.168.1.2'],
-# 'server_name': ['AlphaServer', 'AlphaServer2']}}}}
+# {'Domains': {'Domain': {'domain_address': 'local',
+# 'nodes_data': {'ARM': {'ethernet-adapter': ['192.168.1.1', '192.168.1.2'],
+# 'server_name': ['AlphaServer', 'AlphaServer2']},
 # Domain - имя домена из поля Имя элемента Alpha.Domain
+# nodes_data - элемент с информации в ноде
 # ARM - имя ноды из полня Имя элемента Узел Alpha.Domain
 # ethernet-adapter - IP адрес  элемент адаптер Ethernet в ARM
 # server_name - название Alpha.Server в ARM
@@ -49,15 +51,13 @@ for RootElement in RootTree:  # проходим по всему дереву
         DomainName = {RootElement.get("name"): {"domain_address": RootElement.get("address"), "nodes_data": {}}}
         for NodeElement in RootElement:
             if NodeElement.tag == "{automation.deployment}domain-node":
-                nodes_data = {}
-                nodes_data[NodeElement.get("name")] = Data.get_data_from_Tree(NodeElement)
+                nodes_data = {NodeElement.get("name"): Data.get_data_from_Tree(NodeElement)}
                 DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
                 domains_data["Domains"].update(DomainName)
 
 
 # Выбор домена
-domain_len = len(domains_data["Domains"])
-if domain_len > 1:
+if len(domains_data["Domains"]) > 1:
     Selected_Domain = DP.select_unit("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)",
                                      domains_data, "Domains")
 else:
@@ -67,26 +67,24 @@ else:
 # Удаляем ноды в которых нет серверов Alpha.Server
 delete_nodes = []
 for Elements in domains_data["Domains"]:
-    #print(Elements)
+    # print(Elements)
     for SubElements in domains_data["Domains"][Elements]["nodes_data"]:
-        #print(SubElements)
-        # if isinstance(domains_data.get("Domains")["nodes_data"][Elements][SubElements], str) == False:
+        # print(SubElements)
         if len(domains_data.get("Domains")[Elements]["nodes_data"][SubElements].get("server_name")) == 0:
             delete_nodes.append(SubElements)
-
 for i in delete_nodes:
     if i in domains_data["Domains"][Selected_Domain]["nodes_data"]:
         del domains_data["Domains"][Selected_Domain]["nodes_data"][i]
+# print(domains_data)
 
-print(domains_data)
-#
-# # Выбор развертования
-# print('Сгенерировать xml для локального развертывания конфигурации или для удаленного?\n1 Локальное развертывание\n2'
-#       ' Удаленное развертывание')
-# Selected_Deployment = DP.select_value(2, 3)
-# if Selected_Deployment == 1:
-#     Selected_Node = DP.select_unit("Необходимо выбрать Узел для которого будут сгенерированы xml", domains_data,
-#                                    "Domains", Selected_Domain)
+# Выбор развертования
+print('Сгенерировать xml для локального развертывания конфигурации или для удаленного?\n1 Локальное развертывание\n2'
+      ' Удаленное развертывание')
+Selected_Deployment = DP.select_value(2, 3)
+if Selected_Deployment == 1:
+    Selected_Node = DP.select_unit("Необходимо выбрать Узел для которого будут сгенерированы xml", domains_data,
+                                   "Domains", Selected_Domain)
+
 # print(Selected_Node)
 # # print(domains_data["Domains"][list(domains_data["Domains"].keys())[Selected_Domain]]["domain_address"])
 # # print(domains_data["Domains"])
