@@ -58,7 +58,6 @@ for RootElement in RootTree:  # проходим по всему дереву
 
 # Выбор домена
 if len(domains_data["Domains"]) > 1:
-    print(type(Selected_Domain))
     Selected_Domain = DP.select_unit("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)",
                                      domains_data, "Domains")
 else:
@@ -76,23 +75,17 @@ for Elements in domains_data["Domains"]:
 for i in delete_nodes:
     if i in domains_data["Domains"][Selected_Domain]["nodes_data"]:
         del domains_data["Domains"][Selected_Domain]["nodes_data"][i]
-# print(domains_data)
 
 # Выбор развертования
-Selected_Deployment = DP.select_unit("Сгенерировать xml для локального развертывания конфигурации или для удаленного?",
-                                     ["Локальное развертывание", "Удаленное развертывание"])
-print(Selected_Deployment)
-# print('Сгенерировать xml для локального развертывания конфигурации или для удаленного?\n1 Локальное развертывание\n2'
-#       ' Удаленное развертывание')
-# Selected_Deployment = DP.select_value(2, 3)
+print('Сгенерировать xml для локального развертывания конфигурации или для удаленного?\n1 Локальное развертывание\n2'
+      ' Удаленное развертывание')
+Selected_Deployment = DP.select_value(2, 3)
 
-# if Selected_Deployment == 1:
-#     Selected_Node = DP.select_unit("Необходимо выбрать Узел для которого будут сгенерированы xml", domains_data,
-#                                    "Domains", Selected_Domain)
-
+if Selected_Deployment == 1:
+    Selected_Node = DP.select_unit("Необходимо выбрать Узел для которого будут сгенерированы xml",
+                                   domains_data["Domains"], Selected_Domain, "nodes_data")
 # print(Selected_Node)
-# # print(domains_data["Domains"][list(domains_data["Domains"].keys())[Selected_Domain]]["domain_address"])
-# # print(domains_data["Domains"])
+
 # domain_address = domains_data["Domains"][Selected_Domain]["domain_address"]
 # node_address = domains_data["Domains"][Selected_Domain]["node_address"]
 # ethernet_address = domains_data["Domains"][Selected_Domain]["ethernet_address"]
