@@ -50,11 +50,15 @@ for RootElement in RootTree:  # проходим по всему дереву
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
         DomainName = {RootElement.get("name"): {"domain_address": RootElement.get("address"), "nodes_data": {}}}
         for NodeElement in RootElement:
-            if NodeElement.tag == "{automation.deployment}domain-node":
-                nodes_data = {NodeElement.get("name"): Data.get_data_from_Tree(NodeElement)}
+            if NodeElement.tag == "{automation.deployment}domain-node":  # Ищем элемент "Узел.Domain"
+                nodes_data = {NodeElement.get("name"): Data.get_domain_data_from_Tree(NodeElement)}
                 DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
                 domains_data["Domains"].update(DomainName)
-
+            elif NodeElement.tag == "{automation.deployment}workstation":  # Ищем элемент "Рабочее место"
+                nodes_data = {NodeElement.get("name"): Data.get_workstation_data_from_Tree(NodeElement)}
+                print(nodes_data)
+                # DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
+                # domains_data["Domains"].update(DomainName)
 
 # Выбор домена
 if len(domains_data["Domains"]) > 1:

@@ -91,7 +91,7 @@ def gen_domain_xml():
 #############################
 
 
-def get_data_from_Tree(_valueIn, temp=None):
+def get_domain_data_from_Tree(_valueIn, temp=None):
     # print(_valueIn)
     if not temp:
         temp = {"ethernet-adapter": [], "server_name": []}
@@ -105,11 +105,21 @@ def get_data_from_Tree(_valueIn, temp=None):
             temp["ethernet-adapter"].append(x.get("address"))
         elif x.tag == "{server}io-server":
             temp["server_name"].append(x.get("name"))
-        temp.update(get_data_from_Tree(x, temp))
+        temp.update(get_domain_data_from_Tree(x, temp))
     return temp
 
 
 #############################
+
+def get_workstation_data_from_Tree(_valueIn, temp=None):
+    # print(_valueIn)
+    if not temp:
+        temp = {"APServiceName": []}
+    for x in _valueIn:
+        if x.tag == "{server}access-point":
+            temp["APServiceName"].append(x.get("name"))
+    if len(temp["APServiceName"]) != 0:
+        return temp
 
 
 def select_value(_maxlength, _attempt):
@@ -156,7 +166,7 @@ def select_unit(_textIn, _dictIn, _elementOne=None, _elementTwo=None):
     print(_textIn, "Доступные эелементы:")
     if not _elementTwo and not _elementOne:  # весь словарь _dictIn дописать
         for i in _dictIn:
-            #print(321)
+            # print(321)
             print(list(_dictIn.keys()).index(i) + 1, i)
     elif not _elementTwo:  # один уровень внутрь словаря _dictIn
         for i in _dictIn[_elementOne]:

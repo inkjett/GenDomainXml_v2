@@ -1,8 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Diagrams>
-  <omx Id="4c11e6a8-e6e9-4933-80cc-ec9ed9cbce5c" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
-  <domain-node Id="051fb1e9-fa44-41ad-b217-a3773bd4dba1" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
-  <domain Id="7346d053-7a97-44cf-8196-d5dfe13484f6" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
+  <omx Id="4c11e6a8-e6e9-4933-80cc-ec9ed9cbce5c" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <link-unit Id="2d7f95c0-e98a-4c51-943e-9821ac852613" Left="40" Top="40" Width="150.463333333333" Height="36.63" />
+    <link-unit Id="85b6d6ff-31a5-4e68-a463-0a1543cc69f3" Left="230.463333333333" Top="40" Width="145.943333333333" Height="36.63" />
+    <link-unit Id="6a12b73a-5b79-4f54-aa59-6dfd59b93c4e" Left="416.406666666667" Top="40" Width="133.823333333333" Height="36.63" />
+    <domain Id="7346d053-7a97-44cf-8196-d5dfe13484f6" Left="590.23" Top="40" Width="132.906666666667" Height="134.63" />
+  </omx>
+  <domain-node Id="051fb1e9-fa44-41ad-b217-a3773bd4dba1" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <ethernet-adapter Id="9c764b25-0539-4fea-b081-b11ca0bf127e" Left="1142.00666666667" Top="276.536672153473" Width="137.993333333333" Height="45.63" />
+    <io-server Id="a5e40cb8-71ad-4ebe-87c6-1b3eab4d2517" Left="30" Top="30" Width="114.616666666667" Height="152" />
+    <io-server Id="4382508e-1b5c-4dd9-a7cc-5e79432e03bc" Left="204.616666666667" Top="30" Width="121.086666666667" Height="152" />
+    <ethernet-adapter Id="069432c2-4ca0-434d-b975-b005b79f4f59" Left="1135.53666666667" Top="342.166672153473" Width="144.463333333333" Height="45.63" />
+  </domain-node>
+  <domain Id="7346d053-7a97-44cf-8196-d5dfe13484f6" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <domain-node Id="051fb1e9-fa44-41ad-b217-a3773bd4dba1" Left="40" Top="40" Width="125.463333333333" Height="124" />
+    <ethernet-net Id="ec063ca5-b7a9-4194-9163-f268758139f6" Left="342.5" Top="20" Width="76.0066666666667" Height="32.59" />
+    <workstation Id="74663b62-3e93-44b2-877e-eeae231ccfba" Left="50" Top="212.031969108582" Width="150" Height="100" />
+    <workstation Id="ac2d41a5-88db-42e2-b54a-72fba521f74a" Left="233" Top="246.031969108581" Width="150" Height="100" />
+  </domain>
   <io-server Id="a5e40cb8-71ad-4ebe-87c6-1b3eab4d2517" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
     <opcda-server Id="1f942caa-2ac0-4a03-830c-b34836a1513c" Left="1138.82333333333" Top="26" Width="117.176666666667" Height="36.63" />
     <opcaeserver-module Id="1f1f4a7d-6861-4991-9264-3e15f3b42af0" Left="1140.97333333333" Top="102.63" Width="115.026666666667" Height="36.63" />
@@ -14,4 +29,33 @@
   <domain-node Id="5c1e5d50-f60e-4d89-ab74-5d9b06010dec" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
   <domain Id="c71f1c32-e013-4f28-91cb-f8e90001976d" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
   <domain Id="7b7ae84d-8199-4641-92d2-c35b4d8fa2df" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
+  <domain-node Id="43e8b689-8ce7-49f7-819f-2e019e4e1159" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
+  <domain-node Id="e001eec9-4543-4a25-bd14-3d20c7238cb8" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <ethernet-adapter Id="551629e9-916e-40e7-8aef-fa54d6229df7" Left="1120.00666666667" Top="276.536672153473" Width="159.993333333333" Height="45.63" />
+  </domain-node>
+  <computer Id="8bbdd2f3-9da9-4355-99b5-c54bf242eec4" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <ethernet-adapter Id="f5d4e674-6886-4ab3-8f46-4096bf9b8db1" Left="1120.00666666667" Top="276.536672153473" Width="159.993333333333" Height="45.63" />
+  </computer>
+  <workstation Id="74663b62-3e93-44b2-877e-eeae231ccfba" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <abstract-ethernet-adapter Id="e19d8a4f-862c-4983-b2fe-355b1b4a3478" Left="1017.37" Top="212.536672153473" Width="172.63" Height="45.63" />
+    <access-point Id="0c926e0a-ba88-401c-b2ae-f413951f4d4b" Left="268" Top="161.031969108582" Width="150" Height="100" />
+    <access-point Id="59e726f9-88f1-4820-be84-34584b8b8306" Left="267" Top="284.031969108582" Width="230" Height="127" />
+  </workstation>
+  <access-point Id="0c926e0a-ba88-401c-b2ae-f413951f4d4b" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <opcda-server Id="e2a858e9-a863-4bf6-bd94-a3fa7ca91f6f" Left="1138.82333333333" Top="26" Width="117.176666666667" Height="36.63" />
+    <opcaeserver-module Id="17f6cfed-c7ed-468b-8ec5-5fcab9a06816" Left="1140.97333333333" Top="102.63" Width="115.026666666667" Height="36.63" />
+    <hda-server Id="f1414ed4-f986-4aaf-a72e-ec19f9edf4d1" Left="1131.01333333333" Top="179.26" Width="124.986666666667" Height="36.63" />
+    <hub-module Id="9746ad79-b946-411e-ac0d-7bead9986fd0" Left="24" Top="26" Width="137.21" Height="99.63" />
+  </access-point>
+  <domain-node Id="d9c31833-c431-43d3-8372-bda3fc646b6f" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <ethernet-adapter Id="43814a55-27ef-49e7-9629-a8d4086f8e8c" Left="1142.00666666667" Top="275.560687599182" Width="137.993333333333" Height="45.63" />
+    <external-runtime Id="cc6b7042-bca9-4475-9467-488a3c2ff280" Left="30" Top="30" Width="95.3433333333333" Height="32" />
+  </domain-node>
+  <domain Id="3136d771-310e-4f61-abd5-c0d3184e7d24" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false" />
+  <access-point Id="59e726f9-88f1-4820-be84-34584b8b8306" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <opcda-server Id="85b659a2-e4c2-408f-a8a3-b9fe50c77f66" Left="1138.82333333333" Top="26" Width="117.176666666667" Height="36.63" />
+    <opcaeserver-module Id="a69b6c69-81b7-423d-a872-bf0c73b11493" Left="1140.97333333333" Top="102.63" Width="115.026666666667" Height="36.63" />
+    <hda-server Id="7990b153-f46c-4b1b-ac2d-48790ff77d4f" Left="1131.01333333333" Top="179.26" Width="124.986666666667" Height="36.63" />
+    <hub-module Id="b9d1d596-8035-49d9-8236-60a33ae00065" Left="24" Top="26" Width="137.21" Height="99.63" />
+  </access-point>
 </Diagrams>
