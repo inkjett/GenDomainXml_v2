@@ -128,3 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea/workspace.xml
+ADS/bin/локальная/testProject.info
+ADS/bin/локальная/Domain/ARM/AlphaServer/alpha.server.cfg
+ADS/bin/локальная/Domain/ARM/AlphaServer2/alpha.server.cfg
+ADS/bin/локальная/Domain/Workstation/111AccessPoint11/alpha.server.cfg
+ADS/bin/локальная/Domain/Workstation/AccessPoint/alpha.server.cfg
