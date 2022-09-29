@@ -43,5 +43,9 @@
     <dp:workstation name="Workstation1" uuid="ac2d41a5-88db-42e2-b54a-72fba521f74a">
       <eth:abstract-ethernet-adapter name="EthernetAdapter" uuid="56053b8f-438b-4b6f-88dc-bce52adcd86f" />
     </dp:workstation>
+    <domain-node name="ARM1234" address="ARM_11" xmlns="automation.deployment" uuid="752abb09-edc4-49ba-ad7a-43101137a185">
+      <ethernet-adapter name="EthernetAdapter" address="192.168.1.1" network="Ethernet" xmlns="automation.ethernet" uuid="7007b4e5-aefe-464d-a20f-a042fae41beb" />
+      <ethernet-adapter name="EthernetAdapter1" address="192.168.1.2" network="Ethernet" xmlns="automation.ethernet" uuid="ea82fbca-e0c5-4429-9b6b-d0920b4684b1" />
+    </domain-node>
   </dp:domain>
 </omx>

@@ -52,13 +52,14 @@ for RootElement in RootTree:  # проходим по всему дереву
         for NodeElement in RootElement:
             if NodeElement.tag == "{automation.deployment}domain-node":  # Ищем элемент "Узел.Domain"
                 nodes_data = {NodeElement.get("name"): Data.get_domain_data_from_Tree(NodeElement)}
-                DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
-                domains_data["Domains"].update(DomainName)
+                if len(nodes_data[NodeElement.get("name")]["server_name"]) != 0:
+                    DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
+                    domains_data["Domains"].update(DomainName)
             elif NodeElement.tag == "{automation.deployment}workstation":  # Ищем элемент "Рабочее место"
                 nodes_data = {NodeElement.get("name"): Data.get_workstation_data_from_Tree(NodeElement)}
-                print(nodes_data)
-                # DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
-                # domains_data["Domains"].update(DomainName)
+                if len(nodes_data[NodeElement.get("name")]["APServiceName"]) != 0:
+                    DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
+                    domains_data["Domains"].update(DomainName)
 
 # Выбор домена
 if len(domains_data["Domains"]) > 1:
@@ -68,17 +69,19 @@ else:
     Selected_Domain = list(domains_data["Domains"].keys())[0]
     print("Доступен один домен:", Selected_Domain)
 
-# Удаляем ноды в которых нет серверов Alpha.Server
-delete_nodes = []
-for Elements in domains_data["Domains"]:
-    # print(Elements)
-    for SubElements in domains_data["Domains"][Elements]["nodes_data"]:
-        # print(SubElements)
-        if len(domains_data.get("Domains")[Elements]["nodes_data"][SubElements].get("server_name")) == 0:
-            delete_nodes.append(SubElements)
-for i in delete_nodes:
-    if i in domains_data["Domains"][Selected_Domain]["nodes_data"]:
-        del domains_data["Domains"][Selected_Domain]["nodes_data"][i]
+# !!!!!!!!!! анахронизм
+# # Удаляем ноды в которых нет серверов Alpha.Server
+# delete_nodes = []
+# for Elements in domains_data["Domains"]:
+#     # print(Elements)
+#     for SubElements in domains_data["Domains"][Elements]["nodes_data"]:
+#         # print(SubElements)
+#         if len(domains_data.get("Domains")[Elements]["nodes_data"][SubElements].get("server_name")) == 0:
+#             delete_nodes.append(SubElements)
+# for i in delete_nodes:
+#     if i in domains_data["Domains"][Selected_Domain]["nodes_data"]:
+#         del domains_data["Domains"][Selected_Domain]["nodes_data"][i]
+# !!!!!!!!!! анахронизм
 
 # Выбор развертования
 print('Сгенерировать xml для локального развертывания конфигурации или для удаленного?\n1 Локальное развертывание\n2'

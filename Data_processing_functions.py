@@ -118,8 +118,9 @@ def get_workstation_data_from_Tree(_valueIn, temp=None):
     for x in _valueIn:
         if x.tag == "{server}access-point":
             temp["APServiceName"].append(x.get("name"))
-    if len(temp["APServiceName"]) != 0:
-        return temp
+    return temp
+
+#############################
 
 
 def select_value(_maxlength, _attempt):
