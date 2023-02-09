@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Id="64160713-c3a4-4159-bdef-224d6d1d24e5" Version="1.0.0" OutputPath="bin\" UpgradeVersion="5">
+  <Files>
+    <SourceFile Name="test.omx" />
+  </Files>
+</Project>

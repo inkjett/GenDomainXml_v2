@@ -8,15 +8,18 @@ import GlobalVariables as GV
 # Переменные
 selected_file_name = ""
 RootTree = ""
+AlphaDomain = {}  # список Alpha.Domain
 domain_Name = ""
 domains_data = {"Domains": {}}
+Selected_AlphaDomain = ""  # выбранный Alpha.Domain
 Selected_Domain = ""  # Выбранный домен
 Selected_Node = ""  # Выбранная нода
 Selected_Deployment = 0  # Выбранное развертывание 1 локальное 2 уделенное
 
 # Получаем список файлов
 files_list = []
-[files_list.append(f) for f in os.listdir(os.getcwd()) if ".omx" in f]  # Создаем список файлов с расширением omx
+# Создаем список файлов с расширением omx - стереть ADS
+[files_list.append(f) for f in os.listdir(os.getcwd() + "\ADS") if ".omx" in f[-4:]]
 if len(files_list) > 1:  # выбор файла
     print('Необходимо выбрать файл для использования:')
     [print(files_list.index(i) + 1, i) for i in files_list]
@@ -30,7 +33,7 @@ else:
 # del files_list  # удаляем переменную со списком файлов
 
 # чтение данных из файла
-with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим по всем строкам файла проекта
+with open("ADS/" + selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим по всем строкам файла проекта
     tree = ET.parse(f)
     RootTree = tree.getroot()
 
@@ -46,6 +49,20 @@ with open(selected_file_name, 'r', encoding="UTF-8") as f:  # Проходим �
 # domain_address - адрес домена из поля Адресс элемента Alpha.Domain
 
 # Далее будет откровенный "колхоз", просто чтобы работало
+
+for RootElement in RootTree:  # проходим по всему дереву
+    if RootElement.tag == "{automation.deployment}domain":
+        AlphaDomain.append(RootElement.get("name"))
+print(AlphaDomain)
+
+# Выбор Alpha.Domain
+if len(AlphaDomain) > 1:
+    Selected_AlphaDomain = DP.select_unit("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)",
+                                     domains_data, "Domains")
+else:
+    Selected_AlphaDomain = list(domains_data["Domains"].keys())[0]
+    print("Доступен один домен:", Selected_AlphaDomain)
+
 for RootElement in RootTree:  # проходим по всему дереву
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
         DomainName = {RootElement.get("name"): {"domain_address": RootElement.get("address"), "nodes_data": {}}}
@@ -60,7 +77,7 @@ for RootElement in RootTree:  # проходим по всему дереву
                 if len(nodes_data[NodeElement.get("name")]["APserver_name"]) != 0:
                     DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
                     domains_data["Domains"].update(DomainName)
-
+#print(domains_data)
 # Выбор домена
 if len(domains_data["Domains"]) > 1:
     Selected_Domain = DP.select_unit("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)",
@@ -83,7 +100,7 @@ else:
 #         del domains_data["Domains"][Selected_Domain]["nodes_data"][i]
 # !!!!!!!!!! анахронизм
 
-# Выбор развертования
+# Выбор развёртывания
 print('Сгенерировать xml для локального развертывания конфигурации или для удаленного?\n1 Локальное развертывание\n2'
       ' Удаленное развертывание')
 Selected_Deployment = DP.select_value(2, 3)
@@ -91,7 +108,9 @@ Selected_Deployment = DP.select_value(2, 3)
 if Selected_Deployment == 1:
     Selected_Node = DP.select_unit("Необходимо выбрать Узел для которого будут сгенерированы xml",
                                    domains_data["Domains"], Selected_Domain, "nodes_data")
-# print(Selected_Node)
+print(Selected_Node)
+print(domains_data["Domains"])
+
 
 # domain_address = domains_data["Domains"][Selected_Domain]["domain_address"]
 # node_address = domains_data["Domains"][Selected_Domain]["node_address"]

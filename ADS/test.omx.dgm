@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Diagrams>
+  <omx Id="64160713-c3a4-4159-bdef-224d6d1d24e5" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <link-unit Id="eb785acf-a90f-44ac-ab32-a4a662cd9cdd" Left="40" Top="40" Width="150.463333333333" Height="36.63" />
+    <link-unit Id="2c47c631-493c-4e39-b370-05721d3ed066" Left="230.463333333333" Top="40" Width="145.943333333333" Height="36.63" />
+    <link-unit Id="cf1e0b5d-4af2-4bcd-b14d-603630350962" Left="416.406666666667" Top="40" Width="133.823333333333" Height="36.63" />
+    <domain Id="c4651698-f073-4cc9-b585-cf230c0b3414" Left="607.23" Top="88" Width="106.51" Height="90.63" />
+    <domain Id="d29fc524-2401-4c94-b57c-da8a7b6897ba" Left="464.23" Top="184" Width="106.51" Height="90.63" />
+  </omx>
+  <domain Id="c4651698-f073-4cc9-b585-cf230c0b3414" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <domain-node Id="9686fc81-9d95-4931-93c6-711893e869d2" Left="107" Top="71" Width="118.993333333333" Height="56" />
+    <ethernet-net Id="ac300462-fce5-429a-873b-9805a6a7f760" Left="345" Top="20" Width="76.0066666666667" Height="32.59" />
+    <domain-node Id="f3033fbe-2104-4cf2-9c51-896b64739758" Left="127" Top="148" Width="118.993333333333" Height="56" />
+  </domain>
+  <domain Id="d29fc524-2401-4c94-b57c-da8a7b6897ba" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <domain-node Id="7c504407-404e-4750-a10e-3e8fafee6d1e" Left="40" Top="40" Width="118.993333333333" Height="56" />
+    <ethernet-net Id="9614d016-5d17-40ea-8498-61964763c9d7" Left="345" Top="20" Width="76.0066666666667" Height="32.59" />
+    <domain-node Id="aa93b412-cb55-459e-86e3-ccf77d60bc27" Left="198.993333333333" Top="40" Width="118.993333333333" Height="56" />
+  </domain>
+</Diagrams>

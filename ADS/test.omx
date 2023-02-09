@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<omx xmlns="system" migration="27" xmlns:dp="automation.deployment" xmlns:eth="automation.ethernet">
+  <link-unit name="System" uuid="eb785acf-a90f-44ac-ab32-a4a662cd9cdd" target="Om.System" />
+  <link-unit name="Server" uuid="2c47c631-493c-4e39-b370-05721d3ed066" target="Om.Server" />
+  <link-unit name="PLC" uuid="cf1e0b5d-4af2-4bcd-b14d-603630350962" target="Om.PLC" />
+  <dp:domain name="Domain" uuid="c4651698-f073-4cc9-b585-cf230c0b3414" address="local">
+    <dp:domain-node name="host" uuid="9686fc81-9d95-4931-93c6-711893e869d2">
+      <eth:ethernet-adapter name="EthernetAdapter" uuid="1b3ca7bb-dca8-4591-b43d-531cab2bd0e9" address="127.0.0.1" network="Ethernet" />
+    </dp:domain-node>
+    <eth:ethernet-net name="Ethernet" uuid="ac300462-fce5-429a-873b-9805a6a7f760" />
+    <dp:domain-node name="host1" uuid="f3033fbe-2104-4cf2-9c51-896b64739758">
+      <eth:ethernet-adapter name="EthernetAdapter" address="127.0.0.1" network="Ethernet" uuid="49a20631-ccc7-4481-beac-876a1fd79b03" />
+    </dp:domain-node>
+  </dp:domain>
+  <dp:domain name="Domain1" address="local" uuid="d29fc524-2401-4c94-b57c-da8a7b6897ba">
+    <dp:domain-node name="host" uuid="7c504407-404e-4750-a10e-3e8fafee6d1e">
+      <eth:ethernet-adapter name="EthernetAdapter" address="127.0.0.1" network="Ethernet" uuid="47ee3a34-bc59-427c-9121-06ba47fe4fbb" />
+    </dp:domain-node>
+    <eth:ethernet-net name="Ethernet" uuid="9614d016-5d17-40ea-8498-61964763c9d7" />
+    <dp:domain-node name="host1" uuid="aa93b412-cb55-459e-86e3-ccf77d60bc27">
+      <eth:ethernet-adapter name="EthernetAdapter" address="127.0.0.1" network="Ethernet" uuid="2c455826-8b95-41f0-835b-1f01e4eb38c3" />
+    </dp:domain-node>
+  </dp:domain>
+</omx>
