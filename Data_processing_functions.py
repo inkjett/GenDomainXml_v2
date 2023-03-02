@@ -120,6 +120,7 @@ def get_workstation_data_from_Tree(_valueIn, temp=None):
             temp["APserver_name"].append(x.get("name"))
     return temp
 
+
 #############################
 
 
@@ -162,20 +163,23 @@ def delete_do_not_contain_AS_node(_ValueIn, _DomainName):
 #############################
 
 # Выбор элемента внутри словаря, доделать сделано только для else
-def select_unit(_textIn, _dictIn, _elementOne=None, _elementTwo=None):
-    # print(_dictIn)
+def select_unit(_textIn, _dataIn, _elementOne=None, _elementTwo=None):
     print(_textIn, "Доступные элементы:")
-    if not _elementTwo and not _elementOne:  # весь словарь _dictIn дописать
-        for i in _dictIn:
-            # print(321)
-            print(list(_dictIn.keys()).index(i) + 1, i) # доделать
-    elif not _elementTwo:  # один уровень внутрь словаря _dictIn
-        for i in _dictIn[_elementOne]:
-            unit_len = len(_dictIn[_elementOne])
-            [print(list(_dictIn[_elementOne].keys()).index(i) + 1, i)]
-        return list(_dictIn[_elementOne].keys())[select_value(unit_len, 3) - 1]
-    else:  # два уровня внутрь словаря _dictIn
-        for i in _dictIn[_elementOne][_elementTwo]:
-            unit_len = len(_dictIn[_elementOne][_elementTwo])
-            [print(list(_dictIn[_elementOne][_elementTwo].keys()).index(i) + 1, i)]
-        return list(_dictIn[_elementOne][_elementTwo].keys())[select_value(unit_len, 3) - 1]
+    if str(type(_dataIn)) == "<class 'dict'>":  # тип <class 'type'> преобразовываю в str и сравниваю
+        if not _elementTwo and not _elementOne:  # весь словарь _dictIn дописать
+            for i in _dataIn:
+                print(list(_dataIn.keys()).index(i) + 1, i)  # доделать
+        elif not _elementTwo:  # один уровень внутрь словаря _dictIn
+            for i in _dataIn[_elementOne]:
+                unit_len = len(_dataIn[_elementOne])
+                [print(list(_dataIn[_elementOne].keys()).index(i) + 1, i)]
+            return list(_dataIn[_elementOne].keys())[select_value(unit_len, 3) - 1]
+        else:  # два уровня внутрь словаря _dictIn
+            for i in _dataIn[_elementOne][_elementTwo]:
+                unit_len = len(_dataIn[_elementOne][_elementTwo])
+                [print(list(_dataIn[_elementOne][_elementTwo].keys()).index(i) + 1, i)]
+            return list(_dataIn[_elementOne][_elementTwo].keys())[select_value(unit_len, 3) - 1]
+    if str(type(_dataIn)) == "<class 'list'>":
+        for i in _dataIn:
+            print(_dataIn.index(i) + 1, i)
+        return _dataIn[select_value(len(_dataIn), 1)-1]

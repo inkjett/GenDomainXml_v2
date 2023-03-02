@@ -4,8 +4,8 @@
     <link-unit Id="eb785acf-a90f-44ac-ab32-a4a662cd9cdd" Left="40" Top="40" Width="150.463333333333" Height="36.63" />
     <link-unit Id="2c47c631-493c-4e39-b370-05721d3ed066" Left="230.463333333333" Top="40" Width="145.943333333333" Height="36.63" />
     <link-unit Id="cf1e0b5d-4af2-4bcd-b14d-603630350962" Left="416.406666666667" Top="40" Width="133.823333333333" Height="36.63" />
-    <domain Id="c4651698-f073-4cc9-b585-cf230c0b3414" Left="607.23" Top="88" Width="106.51" Height="90.63" />
-    <domain Id="d29fc524-2401-4c94-b57c-da8a7b6897ba" Left="464.23" Top="184" Width="106.51" Height="90.63" />
+    <domain Id="c4651698-f073-4cc9-b585-cf230c0b3414" Left="491.23" Top="193" Width="106.51" Height="90.63" />
+    <domain Id="505e4b52-f676-449d-b6dc-c026d901849d" Left="374.23" Top="191" Width="106.51" Height="90.63" />
   </omx>
   <domain Id="c4651698-f073-4cc9-b585-cf230c0b3414" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
     <domain-node Id="9686fc81-9d95-4931-93c6-711893e869d2" Left="107" Top="71" Width="118.993333333333" Height="56" />

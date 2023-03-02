@@ -12,13 +12,13 @@
       <eth:ethernet-adapter name="EthernetAdapter" address="127.0.0.1" network="Ethernet" uuid="49a20631-ccc7-4481-beac-876a1fd79b03" />
     </dp:domain-node>
   </dp:domain>
-  <dp:domain name="Domain1" address="local" uuid="d29fc524-2401-4c94-b57c-da8a7b6897ba">
-    <dp:domain-node name="host" uuid="7c504407-404e-4750-a10e-3e8fafee6d1e">
-      <eth:ethernet-adapter name="EthernetAdapter" address="127.0.0.1" network="Ethernet" uuid="47ee3a34-bc59-427c-9121-06ba47fe4fbb" />
+  <dp:domain name="Domain1" address="local" uuid="505e4b52-f676-449d-b6dc-c026d901849d">
+    <dp:domain-node name="host" uuid="59fbf0ae-2893-414e-b961-512e606b8ae6">
+      <eth:ethernet-adapter name="EthernetAdapter" address="127.0.0.1" network="Ethernet" uuid="3ecf585c-77f0-41b0-8de2-16771b74350a" />
     </dp:domain-node>
-    <eth:ethernet-net name="Ethernet" uuid="9614d016-5d17-40ea-8498-61964763c9d7" />
-    <dp:domain-node name="host1" uuid="aa93b412-cb55-459e-86e3-ccf77d60bc27">
-      <eth:ethernet-adapter name="EthernetAdapter" address="127.0.0.1" network="Ethernet" uuid="2c455826-8b95-41f0-835b-1f01e4eb38c3" />
+    <eth:ethernet-net name="Ethernet" uuid="0031f6bd-3582-4ac5-baa0-29c5df456995" />
+    <dp:domain-node name="host1" uuid="9889833e-2062-4ff8-903c-8539bdbc4607">
+      <eth:ethernet-adapter name="EthernetAdapter" address="127.0.0.1" network="Ethernet" uuid="f9ba9ae8-3a84-49ed-a989-8183950066b6" />
     </dp:domain-node>
   </dp:domain>
 </omx>

@@ -5,10 +5,21 @@ import Data_processing_functions as DP
 import xml.etree.ElementTree as ET  # подключаем The ElementTree XML
 import GlobalVariables as GV
 
+# поиск данных домена
+# {'Domains': {'Domain': {'domain_address': 'local',
+# 'nodes_data': {'ARM': {'ethernet-adapter': ['192.168.1.1', '192.168.1.2'],
+# 'server_name': ['AlphaServer', 'AlphaServer2']},
+# Domain - имя домена из поля Имя элемента Alpha.Domain
+# nodes_data - элемент с информации в ноде
+# ARM - имя ноды из полня Имя элемента Узел Alpha.Domain
+# ethernet-adapter - IP адрес  элемент адаптер Ethernet в ARM
+# server_name - название Alpha.Server в ARM
+# domain_address - адрес домена из поля Адресс элемента Alpha.Domain
+
 # Переменные
 selected_file_name = ""
 RootTree = ""
-AlphaDomain = {}  # список Alpha.Domain
+AlphaDomain = []  # список Alpha.Domain тип список
 domain_Name = ""
 domains_data = {"Domains": {}}
 Selected_AlphaDomain = ""  # выбранный Alpha.Domain
@@ -37,47 +48,37 @@ with open("ADS/" + selected_file_name, 'r', encoding="UTF-8") as f:  # Прох�
     tree = ET.parse(f)
     RootTree = tree.getroot()
 
-# поиск данных домена
-# {'Domains': {'Domain': {'domain_address': 'local',
-# 'nodes_data': {'ARM': {'ethernet-adapter': ['192.168.1.1', '192.168.1.2'],
-# 'server_name': ['AlphaServer', 'AlphaServer2']},
-# Domain - имя домена из поля Имя элемента Alpha.Domain
-# nodes_data - элемент с информации в ноде
-# ARM - имя ноды из полня Имя элемента Узел Alpha.Domain
-# ethernet-adapter - IP адрес  элемент адаптер Ethernet в ARM
-# server_name - название Alpha.Server в ARM
-# domain_address - адрес домена из поля Адресс элемента Alpha.Domain
-
 # Далее будет откровенный "колхоз", просто чтобы работало
-
 for RootElement in RootTree:  # проходим по всему дереву
     if RootElement.tag == "{automation.deployment}domain":
         AlphaDomain.append(RootElement.get("name"))
-print(AlphaDomain)
+
 
 # Выбор Alpha.Domain
 if len(AlphaDomain) > 1:
-    Selected_AlphaDomain = DP.select_unit("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)",
-                                     domains_data, "Domains")
+    Selected_AlphaDomain = DP.select_unit("Для генерации xml файлов необходимо выбрать домен Alpha.Domain (выбрав соответствующее число)",
+                                     AlphaDomain, "Domains")
 else:
-    Selected_AlphaDomain = list(domains_data["Domains"].keys())[0]
-    print("Доступен один домен:", Selected_AlphaDomain)
+    Selected_AlphaDomain = AlphaDomain[0]
+    print("Доступен только один домен, Alpha.Domain:", Selected_AlphaDomain)
 
 for RootElement in RootTree:  # проходим по всему дереву
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
-        DomainName = {RootElement.get("name"): {"domain_address": RootElement.get("address"), "nodes_data": {}}}
-        for NodeElement in RootElement:
-            if NodeElement.tag == "{automation.deployment}domain-node":  # Ищем элемент "Узел.Domain"
-                nodes_data = {NodeElement.get("name"): Data.get_domain_data_from_Tree(NodeElement)}
-                if len(nodes_data[NodeElement.get("name")]["ASserver_name"]) != 0:
-                    DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
-                    domains_data["Domains"].update(DomainName)
-            elif NodeElement.tag == "{automation.deployment}workstation":  # Ищем элемент "Рабочее место"
-                nodes_data = {NodeElement.get("name"): Data.get_workstation_data_from_Tree(NodeElement)}
-                if len(nodes_data[NodeElement.get("name")]["APserver_name"]) != 0:
-                    DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
-                    domains_data["Domains"].update(DomainName)
-#print(domains_data)
+        if Selected_AlphaDomain == RootElement.get("name"):
+            DomainName = {RootElement.get("name"): {"domain_address": RootElement.get("address"), "nodes_data": {}}}
+            for NodeElement in RootElement:
+                print(NodeElement.tag)
+                if NodeElement.tag == "{automation.deployment}domain-node":  # Ищем элемент "Узел.Domain"
+                    nodes_data = {NodeElement.get("name"): Data.get_domain_data_from_Tree(NodeElement)}
+                    if len(nodes_data[NodeElement.get("name")]["ASserver_name"]) != 0:
+                        DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
+                        domains_data["Domains"].update(DomainName)
+                elif NodeElement.tag == "{automation.deployment}workstation":  # Ищем элемент "Рабочее место"
+                    nodes_data = {NodeElement.get("name"): Data.get_workstation_data_from_Tree(NodeElement)}
+                    if len(nodes_data[NodeElement.get("name")]["APserver_name"]) != 0:
+                        DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
+                        domains_data["Domains"].update(DomainName)
+print(domains_data)
 # Выбор домена
 if len(domains_data["Domains"]) > 1:
     Selected_Domain = DP.select_unit("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)",
