@@ -67,12 +67,14 @@ for RootElement in RootTree:  # проходим по всему дереву
         if Selected_AlphaDomain == RootElement.get("name"):
             DomainName = {RootElement.get("name"): {"domain_address": RootElement.get("address"), "nodes_data": {}}}
             for NodeElement in RootElement:
-                print(NodeElement.tag)
                 if NodeElement.tag == "{automation.deployment}domain-node":  # Ищем элемент "Узел.Domain"
                     nodes_data = {NodeElement.get("name"): Data.get_domain_data_from_Tree(NodeElement)}
+                    print(nodes_data[NodeElement.get("name")])
                     if len(nodes_data[NodeElement.get("name")]["ASserver_name"]) != 0:
                         DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
                         domains_data["Domains"].update(DomainName)
+                    else:
+                        print("В узле домена Alpha.Domain:", RootElement.get("name") ," нет экземпляра Alpha.Server")
                 elif NodeElement.tag == "{automation.deployment}workstation":  # Ищем элемент "Рабочее место"
                     nodes_data = {NodeElement.get("name"): Data.get_workstation_data_from_Tree(NodeElement)}
                     if len(nodes_data[NodeElement.get("name")]["APserver_name"]) != 0:
