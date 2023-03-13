@@ -6,10 +6,26 @@
   <dp:domain name="Domain" uuid="c4651698-f073-4cc9-b585-cf230c0b3414" address="local">
     <dp:domain-node name="host" uuid="9686fc81-9d95-4931-93c6-711893e869d2">
       <eth:ethernet-adapter name="EthernetAdapter" uuid="1b3ca7bb-dca8-4591-b43d-531cab2bd0e9" address="127.0.0.1" network="Ethernet" />
+      <srv:io-server name="Server" uuid="a61211ec-c4af-4c68-8cfd-3f93353e535d">
+        <srv:opcda-server name="DaServer" uuid="fd9903b2-918d-4bff-8dc0-10805affe5ab" />
+        <srv:opcaeserver-module name="AeServer" uuid="4cc0fbaa-0a4e-4c34-92d8-75d9d02e699f" />
+        <srv:hda-server name="HdaServer" uuid="db600ec7-b5b4-4246-bc7d-8bebc007fbf3" />
+        <srv:opcua-module name="UaServer" uuid="4b71dfe8-14ab-49a7-9e79-3041a0aaff69" />
+        <srv:tcp-server name="TcpServer" uuid="4498f804-8b1c-4e06-9eda-501d8113ec72" />
+        <srv:history-module name="HistoryModule" uuid="1853cbc6-915b-480d-985d-55a745879d70" />
+      </srv:io-server>
     </dp:domain-node>
     <eth:ethernet-net name="Ethernet" uuid="ac300462-fce5-429a-873b-9805a6a7f760" />
     <dp:domain-node name="host1" uuid="f3033fbe-2104-4cf2-9c51-896b64739758">
       <eth:ethernet-adapter name="EthernetAdapter" address="127.0.0.1" network="Ethernet" uuid="49a20631-ccc7-4481-beac-876a1fd79b03" />
+      <srv:io-server name="Server1" uuid="7dcd3ea1-9df0-4fd0-97e9-e9b7d1781703">
+        <srv:opcda-server name="DaServer" uuid="07d5c74c-41ed-4c52-a65a-35ec60a18198" />
+        <srv:opcaeserver-module name="AeServer" uuid="1137f6bd-6c00-4b87-b737-fcca491def7e" />
+        <srv:hda-server name="HdaServer" uuid="e855483d-2313-40aa-9480-8061f90ca07b" />
+        <srv:opcua-module name="UaServer" uuid="16105d8f-6a3f-4ff7-b83d-256ffb640af1" />
+        <srv:tcp-server name="TcpServer" uuid="48cbe2f2-5f3c-48ed-8834-7197a6b8ae2b" />
+        <srv:history-module name="HistoryModule" uuid="d9a3ce9f-29ee-4cd5-802a-d93bb344bc44" />
+      </srv:io-server>
     </dp:domain-node>
   </dp:domain>
   <dp:domain name="Domain1" address="local" uuid="505e4b52-f676-449d-b6dc-c026d901849d">

@@ -92,9 +92,9 @@ def gen_domain_xml():
 
 
 def get_domain_data_from_Tree(_valueIn, temp=None):
-    # print(_valueIn)
+    #print(_valueIn)
     if not temp:
-        temp = {"ethernet-adapter": [], "ASserver_name": []}
+        temp = {"ethernet-adapter": [], "ServiceName": []}
     for x in _valueIn:
         if x.tag == "{automation.deployment}domain":
             temp.update({x.get("name"): x.get("address")})
@@ -104,7 +104,7 @@ def get_domain_data_from_Tree(_valueIn, temp=None):
         elif x.tag == "{automation.ethernet}ethernet-adapter":
             temp["ethernet-adapter"].append(x.get("address"))
         elif x.tag == "{server}io-server":
-            temp["ASserver_name"].append(x.get("name"))
+            temp["ServiceName"].append(x.get("name"))
         temp.update(get_domain_data_from_Tree(x, temp))
     return temp
 

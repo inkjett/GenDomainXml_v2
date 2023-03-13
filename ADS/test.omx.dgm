@@ -8,9 +8,9 @@
     <domain Id="505e4b52-f676-449d-b6dc-c026d901849d" Left="351.23" Top="195" Width="106.51" Height="90.63" />
   </omx>
   <domain Id="c4651698-f073-4cc9-b585-cf230c0b3414" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
-    <domain-node Id="9686fc81-9d95-4931-93c6-711893e869d2" Left="107" Top="71" Width="118.993333333333" Height="56" />
+    <domain-node Id="9686fc81-9d95-4931-93c6-711893e869d2" Left="137" Top="102" Width="118.993333333333" Height="56" />
     <ethernet-net Id="ac300462-fce5-429a-873b-9805a6a7f760" Left="345" Top="20" Width="76.0066666666667" Height="32.59" />
-    <domain-node Id="f3033fbe-2104-4cf2-9c51-896b64739758" Left="127" Top="148" Width="118.993333333333" Height="56" />
+    <domain-node Id="f3033fbe-2104-4cf2-9c51-896b64739758" Left="136" Top="166" Width="118.993333333333" Height="56" />
   </domain>
   <domain Id="d29fc524-2401-4c94-b57c-da8a7b6897ba" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
     <domain-node Id="7c504407-404e-4750-a10e-3e8fafee6d1e" Left="40" Top="40" Width="118.993333333333" Height="56" />
@@ -18,12 +18,19 @@
     <domain-node Id="aa93b412-cb55-459e-86e3-ccf77d60bc27" Left="198.993333333333" Top="40" Width="118.993333333333" Height="56" />
   </domain>
   <domain Id="505e4b52-f676-449d-b6dc-c026d901849d" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
-    <domain-node Id="59fbf0ae-2893-414e-b961-512e606b8ae6" Left="48" Top="38" Width="118.993333333333" Height="56" />
+    <domain-node Id="59fbf0ae-2893-414e-b961-512e606b8ae6" Left="52" Top="39" Width="118.993333333333" Height="56" />
     <ethernet-net Id="0031f6bd-3582-4ac5-baa0-29c5df456995" Left="345" Top="20" Width="76.0066666666667" Height="32.59" />
     <domain-node Id="9889833e-2062-4ff8-903c-8539bdbc4607" Left="198.993333333333" Top="40" Width="118.993333333333" Height="56" />
   </domain>
   <domain-node Id="59fbf0ae-2893-414e-b961-512e606b8ae6" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
     <ethernet-adapter Id="3ecf585c-77f0-41b0-8de2-16771b74350a" Left="1152.00666666667" Top="280.020687599182" Width="137.993333333333" Height="45.63" />
     <io-server Id="ed0d451a-78a6-4d62-b6a4-568d9fcdaf89" Left="247" Top="319" Width="150" Height="150" />
+  </domain-node>
+  <domain-node Id="9889833e-2062-4ff8-903c-8539bdbc4607" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <ethernet-adapter Id="f9ba9ae8-3a84-49ed-a989-8183950066b6" Left="1152.00666666667" Top="280.020687599182" Width="137.993333333333" Height="45.63" />
+  </domain-node>
+  <domain-node Id="9686fc81-9d95-4931-93c6-711893e869d2" OffsetX="0" OffsetY="0" Scale="1" SnapToGrid="false">
+    <ethernet-adapter Id="1b3ca7bb-dca8-4591-b43d-531cab2bd0e9" Left="1152.00666666667" Top="279.520687599182" Width="137.993333333333" Height="45.63" />
+    <io-server Id="a61211ec-c4af-4c68-8cfd-3f93353e535d" Left="277" Top="309" Width="150" Height="150" />
   </domain-node>
 </Diagrams>

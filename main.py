@@ -53,7 +53,6 @@ for RootElement in RootTree:  # проходим по всему дереву
     if RootElement.tag == "{automation.deployment}domain":
         AlphaDomain.append(RootElement.get("name"))
 
-
 # Выбор Alpha.Domain
 if len(AlphaDomain) > 1:
     Selected_AlphaDomain = DP.select_unit("Для генерации xml файлов необходимо выбрать домен Alpha.Domain (выбрав соответствующее число)",
@@ -62,57 +61,87 @@ else:
     Selected_AlphaDomain = AlphaDomain[0]
     print("Доступен только один домен, Alpha.Domain:", Selected_AlphaDomain)
 
+
+
+
 for RootElement in RootTree:  # проходим по всему дереву
     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
         if Selected_AlphaDomain == RootElement.get("name"):
-            DomainName = {RootElement.get("name"): {"domain_address": RootElement.get("address"), "nodes_data": {}}}
+            #print("Selected_AlphaDomain =", Selected_AlphaDomain)
+            DomainName = {RootElement.get("name"): {"AlphaDomain": RootElement.get("name"), "domain_address": RootElement.get("address"), "nodes_data": {}}}
+            #print("DomainName =", DomainName)
+            countOfNodeElement = 1
             for NodeElement in RootElement:
-                if NodeElement.tag == "{automation.deployment}domain-node":  # Ищем элемент "Узел.Domain"
-                    nodes_data = {NodeElement.get("name"): Data.get_domain_data_from_Tree(NodeElement)}
-                    print(nodes_data[NodeElement.get("name")])
-                    if len(nodes_data[NodeElement.get("name")]["ASserver_name"]) != 0:
+                if NodeElement.tag == "{automation.deployment}domain-node":  # Ищем элемент Узел Alph.Domain
+                    #print(Data.get_domain_data_from_Tree(NodeElement))
+                    nodes_data = {"NodeAlphaDomain" + str(countOfNodeElement): Data.get_domain_data_from_Tree(NodeElement)}
+
+                    print(nodes_data)
+                    if len(nodes_data["NodeAlphaDomain" + str(countOfNodeElement)]["ServiceName"]) != 0:
                         DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
                         domains_data["Domains"].update(DomainName)
-                    else:
-                        print("В узле домена Alpha.Domain:", RootElement.get("name") ," нет экземпляра Alpha.Server")
-                elif NodeElement.tag == "{automation.deployment}workstation":  # Ищем элемент "Рабочее место"
-                    nodes_data = {NodeElement.get("name"): Data.get_workstation_data_from_Tree(NodeElement)}
-                    if len(nodes_data[NodeElement.get("name")]["APserver_name"]) != 0:
-                        DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
-                        domains_data["Domains"].update(DomainName)
-print(domains_data)
-# Выбор домена
-if len(domains_data["Domains"]) > 1:
-    Selected_Domain = DP.select_unit("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)",
-                                     domains_data, "Domains")
-else:
-    Selected_Domain = list(domains_data["Domains"].keys())[0]
-    print("Доступен один домен:", Selected_Domain)
+                    #nodes_data = {NodeElement.get("name"): Data.get_domain_data_from_Tree(NodeElement)}
+                    #print("nodes_data = ", nodes_data)
+                #     if len(nodes_data[NodeElement.get("name")]["ServiceName"]) != 0:
+                #         DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
+                #         domains_data["Domains"].update(DomainName)
+                #     else:
+                #         print("В узле домена Alpha.Domain:", RootElement.get("name"), " нет экземпляра Alpha.Server")
+                # elif NodeElement.tag == "{automation.deployment}workstation":  # Ищем элемент "Рабочее место"
+                #     nodes_data = {NodeElement.get("name"): Data.get_workstation_data_from_Tree(NodeElement)}
+                #     if len(nodes_data[NodeElement.get("name")]["APserver_name"]) != 0:
+                #         DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
+                #         domains_data["Domains"].update(DomainName)
+                    countOfNodeElement += 1
 
-# !!!!!!!!!! анахронизм
-# # Удаляем ноды в которых нет серверов Alpha.Server
-# delete_nodes = []
-# for Elements in domains_data["Domains"]:
-#     # print(Elements)
-#     for SubElements in domains_data["Domains"][Elements]["nodes_data"]:
-#         # print(SubElements)
-#         if len(domains_data.get("Domains")[Elements]["nodes_data"][SubElements].get("server_name")) == 0:
-#             delete_nodes.append(SubElements)
-# for i in delete_nodes:
-#     if i in domains_data["Domains"][Selected_Domain]["nodes_data"]:
-#         del domains_data["Domains"][Selected_Domain]["nodes_data"][i]
-# !!!!!!!!!! анахронизм
 
-# Выбор развёртывания
-print('Сгенерировать xml для локального развертывания конфигурации или для удаленного?\n1 Локальное развертывание\n2'
-      ' Удаленное развертывание')
-Selected_Deployment = DP.select_value(2, 3)
-
-if Selected_Deployment == 1:
-    Selected_Node = DP.select_unit("Необходимо выбрать Узел для которого будут сгенерированы xml",
-                                   domains_data["Domains"], Selected_Domain, "nodes_data")
-print(Selected_Node)
-print(domains_data["Domains"])
+#
+#
+# for RootElement in RootTree:  # проходим по всему дереву
+#     if RootElement.tag == "{automation.deployment}domain":  # ищем тег с названием домена
+#         if Selected_AlphaDomain == RootElement.get("name"):
+#             #print("Selected_AlphaDomain =", Selected_AlphaDomain)
+#             DomainName = {RootElement.get("name"): {"AlphaDomain": RootElement.get("name"), "domain_address": RootElement.get("address"), "nodes_data": {}}}
+#             print("DomainName =", DomainName)
+#             for NodeElement in RootElement:
+#                 if NodeElement.tag == "{automation.deployment}domain-node":  # Ищем элемент Узел Alph.Domain
+#                     nodes_data = {NodeElement.get("name"): Data.get_domain_data_from_Tree(NodeElement)}
+#                     #print("nodes_data = ", nodes_data)
+#                     if len(nodes_data[NodeElement.get("name")]["ASserver_name"]) != 0:
+#                         DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
+#                         domains_data["Domains"].update(DomainName)
+#                     else:
+#                         print("В узле домена Alpha.Domain:", RootElement.get("name"), " нет экземпляра Alpha.Server")
+#                         break
+#                 elif NodeElement.tag == "{automation.deployment}workstation":  # Ищем элемент "Рабочее место"
+#                     nodes_data = {NodeElement.get("name"): Data.get_workstation_data_from_Tree(NodeElement)}
+#                     if len(nodes_data[NodeElement.get("name")]["APserver_name"]) != 0:
+#                         DomainName[RootElement.get("name")]["nodes_data"].update(nodes_data)
+#                         domains_data["Domains"].update(DomainName)
+#
+# #print("domains_data=", domains_data)
+#
+# # Выбор домена
+# if len(domains_data["Domains"]) > 1:
+#     Selected_Domain = DP.select_unit("Необходимо выбрать Домен для генерации xml файлов (выбрав соответствующее число)",
+#                                      domains_data, "Domains")
+# else:
+#     Selected_Domain = list(domains_data["Domains"].keys())[0]
+#     print("Доступен один домен:", Selected_Domain)
+#
+# # был анахронизм - #1, смотреть внизу списка
+#
+#
+# # Выбор развёртывания
+# print('Сгенерировать xml для локального развертывания конфигурации или для удаленного?\n1 Локальное развертывание\n2'
+#       ' Удаленное развертывание')
+# Selected_Deployment = DP.select_value(2, 3)
+#
+# if Selected_Deployment == 1:
+#     Selected_Node = DP.select_unit("Необходимо выбрать Узел для которого будут сгенерированы xml",
+#                                    domains_data["Domains"], Selected_Domain, "nodes_data")
+# print(Selected_Node)
+# print(domains_data["Domains"])
 
 
 # domain_address = domains_data["Domains"][Selected_Domain]["domain_address"]
@@ -148,3 +177,19 @@ print(domains_data["Domains"])
 # obj = DM._domain_elements()
 # obj.create_exemplar("local1","ARM1","127.1.1.0","AlphaServer")
 # print(obj._domain)
+
+
+
+
+# #1 Удаляем ноды в которых нет серверов Alpha.Server
+# delete_nodes = []
+# for Elements in domains_data["Domains"]:
+#     # print(Elements)
+#     for SubElements in domains_data["Domains"][Elements]["nodes_data"]:
+#         # print(SubElements)
+#         if len(domains_data.get("Domains")[Elements]["nodes_data"][SubElements].get("server_name")) == 0:
+#             delete_nodes.append(SubElements)
+# for i in delete_nodes:
+#     if i in domains_data["Domains"][Selected_Domain]["nodes_data"]:
+#         del domains_data["Domains"][Selected_Domain]["nodes_data"][i]
+# !!!!!!!!!! анахронизм
